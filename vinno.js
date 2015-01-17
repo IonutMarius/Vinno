@@ -1,4 +1,5 @@
 	function pressButton (tab) {
- 	 alert('The browser action was clicked! Yay!');
+
+ 	 alert($("#eow-title").attr("title"));
 	}
 	chrome.browserAction.onClicked.addListener(pressButton);
