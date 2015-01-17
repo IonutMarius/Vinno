@@ -1,7 +1,0 @@
-some text
-my e
-<<<<<<< HEAD
-oooo
-=======
-xxxxx
->>>>>>> origin/master
