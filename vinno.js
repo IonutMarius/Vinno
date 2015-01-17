@@ -2,7 +2,7 @@
 function pressButton (tab) {
     alert('The browser action was clicked! Yay!');
 }
-chrome.browserAction.onClicked.addListener(getVideoID);
+chrome.browserAction.onClicked.addListener(pressButton);
 
 function getVideoID(){
     var videId;
@@ -14,3 +14,4 @@ function getVideoID(){
 
     alert(videoId);
 };
+getVideoID();
