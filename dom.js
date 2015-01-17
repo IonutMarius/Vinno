@@ -1,8 +1,6 @@
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    if (request.action === "getDOM"){
-        var title = $("#watch-headline-title").children().attr("title");
-        sendResponse({dom: title ,dom2:"ceva"});
-    }
-    else
-        sendResponse({}); // Send nothing..
+ if (request.action === "getDOM")
+   sendResponse({dom: "The dom that you want to get"});
+ else
+   sendResponse({}); // Send nothing..
 });
