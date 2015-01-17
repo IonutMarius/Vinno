@@ -1,16 +1,9 @@
-<<<<<<< HEAD
 function pressButton (tab) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
-        var activeTab = arrayOfTabs[0];
-        var match = activeTab.url.match(/[?&]v=([^&]+)/);
-        alert(match[1]);
 
-    });
-};
+    function pressButton (tab) {
+        // But for now, let's just make sure what we have so
+        // far is working as expected.
+        alert('The browser action was clicked! Yay!');
+    }
+}
 chrome.browserAction.onClicked.addListener(pressButton);
-=======
-	function pressButton (tab) {
- 	 alert('The browser action was clicked! Yay!');
-	}
-	chrome.browserAction.onClicked.addListener(pressButton);
->>>>>>> origin/master
