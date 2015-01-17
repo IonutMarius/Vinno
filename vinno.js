@@ -3,6 +3,7 @@ function getTitle () {
 	var title = $("#watch-headline-title").children.attr("title");
     alert(title);
 }
+
 function getVideoID(){
     var videId;
     chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
@@ -13,4 +14,4 @@ function getVideoID(){
 
     alert(videoId);
 };
-pressButton();
+getTitle();
