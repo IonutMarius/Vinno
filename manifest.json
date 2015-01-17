@@ -10,7 +10,7 @@
         "default_popup":"vinno.html"
     },
     "content_scripts": [ {
-        "js": [ "jquery.min.js"],
+        "js": [ "jquery.min.js","dom.js"],
         "matches": [ "http://*/*", "https://*/*"]
     }],
     "permissions": [
