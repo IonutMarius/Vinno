@@ -1,9 +1,8 @@
 
-function pressButton (tab) {
-    alert('The browser action was clicked! Yay!');
+function getTitle () {
+	var title = $("#watch-headline-title").children.attr("title");
+    alert(title);
 }
-chrome.browserAction.onClicked.addListener(getVideoID);
-
 function getVideoID(){
     var videId;
     chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
@@ -14,4 +13,4 @@ function getVideoID(){
 
     alert(videoId);
 };
-getVideoID();
+pressButton();
