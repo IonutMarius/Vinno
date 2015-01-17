@@ -1,7 +1,11 @@
 
 function getTitle () {
-	var title = $("#watch-headline-title").children.attr("title");
-    alert(title);
+    chrome.tabs.getSelected(null, function(tab) {
+        // Send a request to the content script.
+        chrome.tabs.sendRequest(tab.id, {action: "getDOM"}, function(response) {
+            console.log(response);
+        });
+    });
 }
 
 function getVideoID(){
