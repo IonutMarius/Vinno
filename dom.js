@@ -1,6 +1,8 @@
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
- if (request.action === "getDOM")
-   sendResponse({dom: "The dom that you want to get"});
+ if (request.action === "getDOM"){
+     var title = document.getElementById("eow-title").getAttribute("title");
+   sendResponse({title: title});
+ }
  else
    sendResponse({}); // Send nothing..
 });
