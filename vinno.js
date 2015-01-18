@@ -1,3 +1,11 @@
+function getTitle () {
+    chrome.tabs.getSelected(null, function(tab) {
+        chrome.tabs.sendRequest(tab.id, {action: "getTitle"}, function(response) {
+            //console.log(response.title);
+            $("#title").html("<p id='title'>Title is "+response.title+"</p>");
+        });
+    });
+};
 function getVideoID(){
     var videoId;
     chrome.tabs.getCurrent(function(tab){
@@ -8,16 +16,9 @@ function getVideoID(){
 };
 
 $(document).ready(function() {
-
+    getTitle();
     $("#testButton").on("click", function(){
         console.log(getVideoID());
     });
 
-});
-chrome.extension.onMessage.addListener(function (message, sender, callback) {
-    console.log("Message called");
-    if(message == "tabChange"){
-        getPlayerId();
-    }
-    
 });
