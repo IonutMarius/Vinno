@@ -13,12 +13,9 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
             var videoId;
             console.log("xxx");
             console.log(chrome.tabs);
-            chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
-                var activeTab = arrayOfTabs[0];
-                var match = activeTab.url.match(/[?&]v=([^&]+)/);
-                videoId = match[1];
-            });
-
+            var url = document.URL;
+            var match = url.match(/[?&]v=([^&]+)/);
+            videoId = match[1];
             sendResponse({id: videoId});
             break;
     }

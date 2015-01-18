@@ -2,17 +2,22 @@ function getTitle () {
     chrome.tabs.getSelected(null, function(tab) {
         chrome.tabs.sendRequest(tab.id, {action: "getTitle"}, function(response) {
             //console.log(response.title);
-            $("#title").html("<p id='title'>Title is "+response.title+"</p>");
+            var videoId;
+            if(respone != undefined){
+                videoId = getVideoID();
+                $("#title").html("<img src='http://i1.ytimg.com/"+videoId+"/0.jpg' /> <p id='title'>Title is "+response.title+"</p>");
+            }
+            
         });
     });
 };
 function getVideoID(){
-    var videoId;
-    chrome.tabs.getCurrent(function(tab){
-        console.log(tab.url);
+    chrome.tabs.getSelected(null, function(tab) {
+        chrome.tabs.sendRequest(tab.id, {action: "getVideoId"}, function(response) {
+            return response.id;
+        });
     });
-
-    return videoId;
+    return undefined;
 };
 
 $(document).ready(function() {
@@ -20,5 +25,4 @@ $(document).ready(function() {
     $("#testButton").on("click", function(){
         console.log(getVideoID());
     });
-
 });
