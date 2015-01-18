@@ -14,7 +14,10 @@ function getTitle (videoId) {
 function getVideoID(){
     chrome.tabs.getSelected(null, function(tab) {
         chrome.tabs.sendRequest(tab.id, {action: "getVideoId"}, function(response) {
-            getTitle(response.id);
+            if(response != undefined){
+                getTitle(response.id);
+            }
+            
         });
     });
 };
