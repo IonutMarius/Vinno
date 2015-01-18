@@ -10,10 +10,8 @@ function getTitle () {
 
 function getVideoID(){
     var videoId;
-    chrome.tabs.query({active: true, currentWindow: true}, function(arrayOfTabs) {
-        var activeTab = arrayOfTabs[0];
-        var match = activeTab.url.match(/[?&]v=([^&]+)/);
-        videoId = match[1];
+    chrome.tabs.getCurrent(function(tab){
+        console.log(tab.url);
     });
 
     return videoId;
@@ -21,7 +19,7 @@ function getVideoID(){
 
 $(document).ready(function() {
     $("#testButton").on("click", function(){
-         console.log(getVideoID());
+        console.log(getVideoID());
     });
 
 });
