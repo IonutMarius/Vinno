@@ -36,10 +36,10 @@ function loadVideos(){
     for (; sKey = window.localStorage.key(i); i++) {
         tempLocalStorage[sKey] = window.localStorage.getItem(sKey);
     }
-    var html = "";
+    var html = "<h2>My Videos</h2><hr>";
     for(item in tempLocalStorage){
         var video = JSON.parse(tempLocalStorage[item]);
-        html += "<h2>My Videos</h2><hr><img src='"+video["imageUrl"]+"' width='320px' height='200px' /> <p>"+video["title"]+"</p><hr>";
+        html += "<img src='"+video["imageUrl"]+"' width='320px' height='200px' /> <p>"+video["title"]+"</p><hr>";
          
     }
      $("#loadedVideos").html(html);
