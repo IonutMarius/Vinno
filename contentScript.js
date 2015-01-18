@@ -11,11 +11,10 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
             break;
         case "getVideoId":
             var videoId;
-            console.log("xxx");
-            console.log(chrome.tabs);
             var url = document.URL;
             var match = url.match(/[?&]v=([^&]+)/);
             videoId = match[1];
+            console.log("Video in content script is "+videoId);
             sendResponse({id: videoId});
             break;
     }

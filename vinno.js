@@ -1,11 +1,12 @@
-function getTitle () {
+function getTitle (videoId) {
     chrome.tabs.getSelected(null, function(tab) {
         chrome.tabs.sendRequest(tab.id, {action: "getTitle"}, function(response) {
             //console.log(response.title);
-            var videoId;
             if(response != undefined){
-                videoId = getVideoID();
-                $("#title").html("<img src='http://i1.ytimg.com/"+videoId+"/0.jpg' /> <p id='title'>Title is "+response.title+"</p>");
+                console.log("i from title is "+ videoId);
+                var imageUrl = "http://i1.ytimg.com/vi/"+videoId+"/0.jpg";
+                console.log(imageUrl);
+                $("#title").html("<img src='"+imageUrl+"' /> <p id='title'>Title is "+response.title+"</p>");
             }
             
         });
@@ -14,14 +15,17 @@ function getTitle () {
 function getVideoID(){
     chrome.tabs.getSelected(null, function(tab) {
         chrome.tabs.sendRequest(tab.id, {action: "getVideoId"}, function(response) {
-            return response.id;
+            console.log("video id in function is "+response.id);
+            while(response == undefined){};
+            getVideoIdFromRequest(response.id);
         });
     });
-    return undefined;
 };
-
+function getVideoIdFromRequest(videoId){
+    getTitle(videoId);
+}
 $(document).ready(function() {
-    getTitle();
+    getVideoID();
     $("#testButton").on("click", function(){
         console.log(getVideoID());
     });

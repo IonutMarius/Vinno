@@ -11,8 +11,6 @@ chrome.tabs.onActivated.addListener(function(activeInfo) {
 function getPlayerId(){
     chrome.tabs.getSelected(null,function(tab){
         chrome.tabs.sendRequest(tab.id,{action:"getIdPlayer"}, function(response){
-
-            console.log(response);
             if(response != undefined){
                 chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
                 chrome.browserAction.setBadgeText({text: 'Video'});
