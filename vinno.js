@@ -3,7 +3,7 @@ function getTitle () {
         chrome.tabs.sendRequest(tab.id, {action: "getTitle"}, function(response) {
             //console.log(response.title);
             var videoId;
-            if(respone != undefined){
+            if(response != undefined){
                 videoId = getVideoID();
                 $("#title").html("<img src='http://i1.ytimg.com/"+videoId+"/0.jpg' /> <p id='title'>Title is "+response.title+"</p>");
             }
