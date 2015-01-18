@@ -39,10 +39,10 @@ function loadVideos(){
     var html = "";
     for(item in tempLocalStorage){
         var video = JSON.parse(tempLocalStorage[item]);
-        html += "<h2>Videos</h2><hr><img src='"+video["imageUrl"]+"' width='320px' height='200px' /> <p>"+video["title"]+"</p><hr>";
+        html += "<h2>My Videos</h2><hr><img src='"+video["imageUrl"]+"' width='320px' height='200px' /> <p>"+video["title"]+"</p><hr>";
          
     }
-     $("#load").html(html);
+     $("#loadedVideos").html(html);
 }
 $(document).ready(function() {
     getVideoID();
