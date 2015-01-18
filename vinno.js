@@ -42,7 +42,7 @@ function loadVideos(){
     var html = "<h2>My Videos</h2><hr>";
     for(item in tempLocalStorage){
         var video = JSON.parse(tempLocalStorage[item]);
-        html += "<img src='"+video["imageUrl"]+"' width='320px' height='200px' /> <p>"+video["title"]+"</p><hr>";
+        html += "<img src='"+video["imageUrl"]+"' width='320px' height='200px' /> <p>"+video["title"]+"</p><button>Edit</button><button>Delete</button><hr>";
          
     }
      $("#loadedVideos").html(html);

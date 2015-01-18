@@ -13,7 +13,7 @@ function getPlayerId(){
         chrome.tabs.sendRequest(tab.id,{action:"getIdPlayer"}, function(response){
             if(response != undefined){
                 chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-                chrome.browserAction.setBadgeText({text: 'Video'});
+                chrome.browserAction.setBadgeText({text: 'Play'});
             }
             else{
                 chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
