@@ -13,6 +13,9 @@
         "js": [ "jquery.min.js","dom.js"],
         "matches": [ "http://*/*", "https://*/*"]
     }],
+    "background":{
+    "scripts": ["jquery.min.js","background.js"]
+    },
     "permissions": [
         "tabs"
     ]
