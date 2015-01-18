@@ -5,7 +5,7 @@ function getTitle (videoId) {
             if(response != undefined){
                 var imageUrl = "http://i1.ytimg.com/vi/"+videoId+"/0.jpg";
                 console.log(imageUrl);
-                $("#currentPlaying").html("<h2>Currently playing:</h2><img src='"+imageUrl+"' width='320px' height='200px'/> <p id='content' data-value='"+response.title+"' data-url='"+imageUrl+"' >"+response.title+"</p>");
+                $("#currentPlaying").html("<h2>Currently playing: </h2><img src='"+imageUrl+"' width='320px' height='200px'/> <p id='content' data-value='"+response.title+"' data-url='"+imageUrl+"' >"+response.title+"</p>");
             }
 
         });
