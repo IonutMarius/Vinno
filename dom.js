@@ -3,6 +3,11 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         case "getTitle":
             var title = document.getElementById("eow-title").getAttribute("title");
             sendResponse({title: title});
+            console.log(document.URL);
+            break;
+        case "getIdPlayer":
+            var playerId = document.getElementById("player");
+            sendResponse({player:player});
             break;
         case "getVideoId":
             var videoId;
