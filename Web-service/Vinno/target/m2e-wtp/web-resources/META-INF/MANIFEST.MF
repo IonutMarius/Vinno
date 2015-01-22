@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Vinno
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: IonutMarius
+Implementation-Vendor-Id: ro.uaic.info
+Build-Jdk: 1.8.0_05
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: demo.VinnoApplication
+
