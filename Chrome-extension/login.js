@@ -12,7 +12,7 @@ $('#loginForm').submit(function(event ) {
             console.log(response);
             console.log(response.message);
             if(response.message === "Success"){
-                window.location.replace("vinno.html");
+                setSessionStorage();
             }
             else{
                 $(".login-message").html("<p style='color:red'>"+response.message+"</p>");
@@ -42,3 +42,27 @@ $('#registerForm').submit(function(event ) {
         }
     });
 });
+$(document).ready(function() {
+   checkIfLogged();
+});
+function setSessionStorage(){
+    chrome.runtime.sendMessage({action: "setSessionStorage"}, function(response) {
+        if(response != undefined){
+            console.log(response);
+            if(response === "Success"){
+                window.location.replace("vinno.html");
+            }
+        }
+    });
+};
+function checkIfLogged(){
+    console.log("Check if logged");
+    chrome.runtime.sendMessage({action: "checkIfLogged"}, function(response) {
+        if(response != undefined){
+            console.log(response);
+            if(response === "Success"){
+                window.location.replace("vinno.html");
+            }
+        }
+    });
+};
