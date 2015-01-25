@@ -17,7 +17,6 @@ function getVideoID(){
             if(response != undefined){
                 getTitle(response.id);
             }
-            
         });
     });
 };
@@ -31,7 +30,7 @@ function addVideo(){
     console.log(JSON.stringify(video));
     localStorage.setItem(Math.random(),JSON.stringify(video));
     console.log(title);
-    
+
 }
 function loadVideos(){
     var tempLocalStorage = {};
@@ -44,14 +43,27 @@ function loadVideos(){
     for(item in tempLocalStorage){
         var video = JSON.parse(tempLocalStorage[item]);
         html += "<img src='"+video["imageUrl"]+"' width='320px' height='200px' /> <p>"+video["title"]+"</p><button>Edit</button><button>Delete</button><hr>";
-         
+
     }
-     $("#loadedVideos").html(html);
+    $("#loadedVideos").html(html);
+}
+function logout(){
+    chrome.runtime.sendMessage({action: "logout"}, function(response) {
+        if(response != undefined){
+            console.log(response);
+            if(response.message === "Success"){
+                window.location.replace("login.html");
+            }
+        }
+    });
 }
 $(document).ready(function() {
     getVideoID();
     loadVideos();
     $("#testButton").on("click", function(){
         addVideo();
+    });
+    $("#logoutBtn").on("click", function(){
+        logout();
     });
 });

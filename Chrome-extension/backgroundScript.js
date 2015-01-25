@@ -34,10 +34,20 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         registerCredentialsAJAXCall(request, sender, sendResponse);
         return true;
     }
+    if(request.action === "setSessionStorage"){
+        sendResponse(setSessionStorage(request));
+    }
+    if(request.action === "checkIfLogged"){
+        sendResponse(checkIfLogged());
+    }
+    if(request.action === "logout"){
+        logout(request, sender, sendResponse);
+        return true;
+    }
 });
 function getCredentialsAJAXCall(request, sender, sendResponse){  
     $.ajax({
-        url: 'http://25.156.172.66:8080/vinno/services/login',
+        url: 'http://25.156.172.66:8080/vinno/users/login',
         type: 'POST',
         contentType: 'application/json',
         data: request.data,
@@ -49,12 +59,11 @@ function getCredentialsAJAXCall(request, sender, sendResponse){
             sendResponse(e.statusText);   
         }
     });
-
 };
 
 function registerCredentialsAJAXCall(request, sender, sendResponse){  
     $.ajax({
-        url: 'http://25.156.172.66:8080/vinno/services/register',
+        url: 'http://25.156.172.66:8080/vinno/users/register',
         type: 'POST',
         contentType: 'application/json',
         data: request.data,
@@ -68,3 +77,33 @@ function registerCredentialsAJAXCall(request, sender, sendResponse){
     });
 
 };
+function setSessionStorage(){
+    sessionStorage["login"] = true;
+    if(sessionStorage["login"] != undefined){
+        return "Success";
+    }
+    return "Fail";
+    
+}
+function checkIfLogged(){
+    console.log("session storage is "+sessionStorage["login"]);
+    if(sessionStorage["login"] === "true"){
+        return "Success";
+    }
+    return "Fail";
+}
+function logout(request, sender, sendResponse){
+    sessionStorage["login"] = undefined;
+       $.ajax({
+        url: 'http://25.156.172.66:8080/vinno/users/logout',
+        type: 'POST',
+        contentType: 'application/json',
+        success: function(response){
+            console.log(response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);   
+        }
+    });
+}
