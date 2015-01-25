@@ -1,5 +1,5 @@
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-   getPlayerId();
+    getPlayerId();
 });
 
 chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {  
@@ -23,15 +23,17 @@ function getPlayerId(){
     });
 };
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-            console.log("In getCredential with request: "+request);
-    if (request.action === "getCredentials")
-      getCredentialsAJAXCall(request, sender, sendResponse);
-      return true;
+    console.log("In getCredential with request: "+request);
+    if (request.action === "getCredentials"){
+        getCredentialsAJAXCall(request, sender, sendResponse);
+        return true;
+    }
 });
 function getCredentialsAJAXCall(request, sender, sendResponse){  
     $.ajax({
-        url: 'http://25.156.172.66:8080/services/login',
+        url: 'http://25.156.172.66:8080/vinno/services/login',
         type: 'POST',
+        contentType: "application/json",
         data: request.data,
         success: function(response){
             console.log(response);
@@ -41,5 +43,5 @@ function getCredentialsAJAXCall(request, sender, sendResponse){
             sendResponse(e.statusText);   
         }
     });
-                       
-});
+
+};
