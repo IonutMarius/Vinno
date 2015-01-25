@@ -70,7 +70,6 @@ public class UserController {
 		if(user != null && user.getPassword().equals(req.getPassword())){
 			respBody = new ResponseBody<Long>(user.getId(), "Success");			
 			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
-			httpSession.setAttribute("message", "mesaaaj");
 		} else {
 			respBody = new ResponseBody<Long>(nullLong, "Username or password invalid");
 			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
