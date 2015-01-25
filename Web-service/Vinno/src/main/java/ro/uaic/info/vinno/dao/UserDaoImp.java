@@ -30,8 +30,15 @@ public class UserDaoImp implements UserDao {
 	}
 
 	@Override
-	public Long get(String username) {
-		return repository.find(username);
+	public User get(String username) {
+		Long userId = repository.find(username);
+		User user = null;
+		
+		if(userId != null){
+			user = repository.getOne(userId);
+		}
+		
+		return user;
 	}
 
 }

@@ -4,5 +4,5 @@ import ro.uaic.info.vinno.bean.User;
 
 public interface UserDao {
 	User save(User user);
-	Long get(String username);
+	User get(String username);
 }
