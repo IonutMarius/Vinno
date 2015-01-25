@@ -31,6 +31,7 @@ function addVideo(){
     console.log(JSON.stringify(video));
     localStorage.setItem(Math.random(),JSON.stringify(video));
     console.log(title);
+    
 }
 function loadVideos(){
     var tempLocalStorage = {};

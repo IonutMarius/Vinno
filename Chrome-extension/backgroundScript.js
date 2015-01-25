@@ -22,3 +22,24 @@ function getPlayerId(){
         });
     });
 };
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+            console.log("In getCredential with request: "+request);
+    if (request.action === "getCredentials")
+      getCredentialsAJAXCall(request, sender, sendResponse);
+      return true;
+});
+function getCredentialsAJAXCall(request, sender, sendResponse){  
+    $.ajax({
+        url: 'http://25.156.172.66:8080/services/login',
+        type: 'POST',
+        data: request.data,
+        success: function(response){
+            console.log(response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);   
+        }
+    });
+                       
+});
