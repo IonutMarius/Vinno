@@ -69,8 +69,8 @@ public class VinnoController {
 		}
 		
 		try {
-			user = userDao.get(req.getUsername());
-			respBody = new ResponseBody<Long>(user.getId(), "Success");			
+			Long userId = userDao.get(req.getUsername());
+			respBody = new ResponseBody<Long>(userId, "Success");			
 			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
 		} catch (NullPointerException e) {
 			respBody = new ResponseBody<Long>(nullLong, "Username or password invalid");
