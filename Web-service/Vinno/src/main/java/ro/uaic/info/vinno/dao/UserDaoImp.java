@@ -1,7 +1,5 @@
 package ro.uaic.info.vinno.dao;
 
-import java.util.ArrayList;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
