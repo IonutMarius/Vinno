@@ -41,7 +41,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         sendResponse(checkIfLogged());
     }
     if(request.action === "logout"){
-        logout();
+        logout(request, sender, sendResponse);
         return true;
     }
 });
@@ -92,7 +92,7 @@ function checkIfLogged(){
     }
     return "Fail";
 }
-function logout(){
+function logout(request, sender, sendResponse){
     sessionStorage["login"] = undefined;
        $.ajax({
         url: 'http://25.156.172.66:8080/vinno/users/logout',
