@@ -1,5 +1,7 @@
 package ro.uaic.info.vinno.dao;
 
+import java.util.ArrayList;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,16 @@ public class UserDaoImp implements UserDao {
 
 	@Override
 	public User get(String username) {
-		// TODO Auto-generated method stub
+		ArrayList<User> allUsers = null;
+		
+		allUsers = (ArrayList<User>) repository.findAll();
+		
+		for(User user : allUsers){
+			if(user.getUsername().equals(username)){
+				return user;
+			}
+		}
+		
 		return null;
 	}
 
