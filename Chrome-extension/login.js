@@ -1,17 +1,44 @@
 $('#loginForm').submit(function(event ) {
     event.preventDefault();
-    // get all the inputs into an array.
     var $inputs = $('#loginForm :input');
 
-    // not sure if you wanted this, but I thought I'd add it.
-    // get an associative array of just the values.
     var values = {};
     $inputs.each(function() {
         values[this.name] = $(this).val();
     });
+    console.log("Sending message with "+JSON.stringify(values));
     chrome.runtime.sendMessage({action: "getCredentials",data:JSON.stringify(values)}, function(response) {
-       if(response != undefined){
+        if(response != undefined){
+            console.log(response);
             console.log(response.message);
+            if(response.message === "Success"){
+                window.location.replace("vinno.html");
+            }
+            else{
+                $(".login-message").html("<p style='color:red'>"+response.message+"</p>");
+            }
+        }
+    });
+});
+$('#registerForm').submit(function(event ) {
+    event.preventDefault();
+    var $inputs = $('#registerForm :input');
+
+    var values = {};
+    $inputs.each(function() {
+        values[this.name] = $(this).val();
+    });
+    console.log("Sending message with "+JSON.stringify(values));
+    chrome.runtime.sendMessage({action: "registerCredentials",data:JSON.stringify(values)}, function(response) {
+        if(response != undefined){
+            console.log(response);
+            console.log(response.message);
+            if(response.message === "User created"){
+                window.location.replace("login.html");
+            }
+            else{
+                $(".login-message").html("<p style='color:red'>"+response.message+"</p>");
+            }
         }
     });
 });

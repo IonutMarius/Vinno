@@ -25,7 +25,13 @@ function getPlayerId(){
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log("In getCredential with request: "+request);
     if (request.action === "getCredentials"){
+        console.log(request.data);
         getCredentialsAJAXCall(request, sender, sendResponse);
+        return true;
+    }
+    if(request.action === "registerCredentials"){
+        console.log(request.data);
+        registerCredentialsAJAXCall(request, sender, sendResponse);
         return true;
     }
 });
@@ -33,7 +39,24 @@ function getCredentialsAJAXCall(request, sender, sendResponse){
     $.ajax({
         url: 'http://25.156.172.66:8080/vinno/services/login',
         type: 'POST',
-        contentType: "application/json",
+        contentType: 'application/json',
+        data: request.data,
+        success: function(response){
+            console.log(response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);   
+        }
+    });
+
+};
+
+function registerCredentialsAJAXCall(request, sender, sendResponse){  
+    $.ajax({
+        url: 'http://25.156.172.66:8080/vinno/services/register',
+        type: 'POST',
+        contentType: 'application/json',
         data: request.data,
         success: function(response){
             console.log(response);
