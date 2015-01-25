@@ -41,12 +41,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         sendResponse(checkIfLogged());
     }
     if(request.action === "logout"){
-        sendResponse(logout());
+        logout();
+        return true;
     }
 });
 function getCredentialsAJAXCall(request, sender, sendResponse){  
     $.ajax({
-        url: 'http://25.156.172.66:8080/vinno/user/login',
+        url: 'http://25.156.172.66:8080/vinno/users/login',
         type: 'POST',
         contentType: 'application/json',
         data: request.data,
@@ -62,7 +63,7 @@ function getCredentialsAJAXCall(request, sender, sendResponse){
 
 function registerCredentialsAJAXCall(request, sender, sendResponse){  
     $.ajax({
-        url: 'http://25.156.172.66:8080/vinno/user/register',
+        url: 'http://25.156.172.66:8080/vinno/users/register',
         type: 'POST',
         contentType: 'application/json',
         data: request.data,
@@ -93,8 +94,16 @@ function checkIfLogged(){
 }
 function logout(){
     sessionStorage["login"] = undefined;
-    if(sessionStorage["login"] === "true"){
-        return "Fail";
-    }
-    return "Success";
+       $.ajax({
+        url: 'http://25.156.172.66:8080/vinno/users/logout',
+        type: 'POST',
+        contentType: 'application/json',
+        success: function(response){
+            console.log(response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);   
+        }
+    });
 }

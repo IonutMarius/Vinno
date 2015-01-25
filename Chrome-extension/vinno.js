@@ -51,7 +51,7 @@ function logout(){
     chrome.runtime.sendMessage({action: "logout"}, function(response) {
         if(response != undefined){
             console.log(response);
-            if(response === "Success"){
+            if(response.message === "Success"){
                 window.location.replace("login.html");
             }
         }
