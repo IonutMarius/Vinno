@@ -1,5 +1,7 @@
 package ro.uaic.info.vinno.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,15 @@ public class VIdeoDaoImpl implements VideoDao {
 		}
 		
 		return createdVideo;
+	}
+
+	@Override
+	public List<Video> get(Long userId) {
+		List<Video> videos = null;
+		
+		videos = repository.findByUserId(userId);
+		
+		return videos;
 	}
 
 }

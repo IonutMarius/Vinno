@@ -1,10 +1,13 @@
 package ro.uaic.info.vinno.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +32,18 @@ public class VideoController {
 		Long videoId = this.videoDao.save(video).getId();
 		respBody = new ResponseBody<Long>(videoId, "Video added");
 		response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.CREATED);
+		
+		return response;
+	}
+	
+	@RequestMapping(value = "/get/{userId}", method = RequestMethod.GET)
+	public ResponseEntity<ResponseBody<List<Video>>> getVideos(@PathVariable(value = "userId") Long userId){
+		ResponseEntity<ResponseBody<List<Video>>> response = null;
+		ResponseBody<List<Video>> respBody = null;
+		
+		List<Video> videos = videoDao.get(userId);
+		respBody = new ResponseBody<List<Video>>(videos, "All videos");
+		response = new ResponseEntity<ResponseBody<List<Video>>>(respBody, HttpStatus.OK);
 		
 		return response;
 	}
