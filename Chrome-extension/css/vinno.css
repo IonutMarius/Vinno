@@ -1,5 +1,5 @@
 html{
-    width: 350px;
+    width: 380px;
     height: 570px;
 }
 
@@ -66,7 +66,7 @@ body{
 }
 
 .button-container{
-    width: 15%;
+    width: 17%;
     float: left;
 }
 
@@ -79,6 +79,6 @@ body{
 .video-title{
     margin-top: 5px;
     margin-left: 3%;
-    width: 52%;
+    width: 50%;
     float: left;
 }
