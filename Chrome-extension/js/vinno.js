@@ -53,7 +53,7 @@ function loadVideos(){
             if(response.data != undefined){
                 var html = "";
                 for(var i = 0;i<response.data.length;i++){
-                    html += "<div class='video'><div class='details'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><span class='video-title'>"+response.data[i].title+"</span><div class='edit-button'><a href='#' class='btn btn-info btn-mini'><i class='icon-white icon-pencil'></i></a></div><div class='delete-button'><a href='#' class='btn btn-danger btn-mini'><i class='icon-white icon-remove'></i></a></div></div></div>";
+                    html += "<div class='video'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class=\"btn btn-info btn-mini edit-button\">Edit</button><button class=\"btn btn-danger btn-mini edit-button\">Delete</button></div></div></div></div>";
                 }
                 $("#loadedVideos").html(html);
             }

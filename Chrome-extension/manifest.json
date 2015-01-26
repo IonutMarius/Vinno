@@ -14,9 +14,11 @@
         "matches": [ "http://*/*", "https://*/*"]
     }],
     "background":{
-    "scripts": ["js/jquery.min.js","js/backgroundScript.js"]
+        "scripts": ["js/jquery.min.js","js/backgroundScript.js"]
     },
     "permissions": [
-        "tabs"
+        "tabs",
+        "http://fonts.googleapis.com/",
+        "https://fonts.googleapis.com/"
     ]
 }

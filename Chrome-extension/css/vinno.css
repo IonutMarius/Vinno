@@ -56,10 +56,24 @@ body{
 }
 
 .thumbnail{
-    width: 120px;
+    width: 30%;
     height: auto;
     margin: 0;
     padding: 0;
     float: left;
 }
 
+.button-container{
+    width: 10%;
+    float: left;
+}
+
+.button-container > button{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.video-title{
+    width: 60%;
+    float: left;
+}
