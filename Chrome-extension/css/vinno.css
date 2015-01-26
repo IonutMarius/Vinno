@@ -54,3 +54,12 @@ body{
     padding-right: 0;
     display: block;
 }
+
+.thumbnail{
+    width: 120px;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
