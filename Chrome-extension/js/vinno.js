@@ -52,7 +52,7 @@ function logout(){
         if(response != undefined){
             console.log(response);
             if(response.message === "Success"){
-                window.location.replace("login.html");
+                window.location.replace("../pages/login.html");
             }
         }
     });

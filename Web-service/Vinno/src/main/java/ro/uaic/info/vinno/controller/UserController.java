@@ -47,7 +47,7 @@ public class UserController {
 			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.CREATED);
 		} catch (UserAlreadyExistsException e) {
 			respBody = new ResponseBody<Long>(nullLong, "User already exists");
-			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.CONFLICT);
+			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
 		}
 		return response;
 	}

@@ -34,7 +34,7 @@ $('#registerForm').submit(function(event ) {
             console.log(response);
             console.log(response.message);
             if(response.message === "User created"){
-                window.location.replace("login.html");
+                window.location.replace("../pages/login.html");
             }
             else{
                 $(".login-message").html("<p style='color:red'>"+response.message+"</p>");
@@ -43,14 +43,14 @@ $('#registerForm').submit(function(event ) {
     });
 });
 $(document).ready(function() {
-   checkIfLogged();
+    checkIfLogged();
 });
 function setSessionStorage(){
     chrome.runtime.sendMessage({action: "setSessionStorage"}, function(response) {
         if(response != undefined){
             console.log(response);
             if(response === "Success"){
-                window.location.replace("vinno.html");
+                window.location.replace("../pages/vinno.html");
             }
         }
     });
@@ -61,7 +61,7 @@ function checkIfLogged(){
         if(response != undefined){
             console.log(response);
             if(response === "Success"){
-                window.location.replace("vinno.html");
+                window.location.replace("../pages/vinno.html");
             }
         }
     });
