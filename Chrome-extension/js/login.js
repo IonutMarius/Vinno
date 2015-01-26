@@ -12,7 +12,7 @@ $('#loginForm').submit(function(event ) {
             console.log(response);
             console.log(response.message);
             if(response.message === "Success"){
-                setSessionStorage();
+                setSessionStorage(response.data);
             }
             else{
                 $(".login-message").html("<p style='color:red'>"+response.message+"</p>");
@@ -33,7 +33,7 @@ $('#registerForm').submit(function(event ) {
         if(response != undefined){
             console.log(response);
             console.log(response.message);
-            if(response.message === "User created"){
+            if(response.data != undefined){
                 $(".login-message").html("<p style='color:red'>"+response.message+"</p>");
                 setTimeout(
                     function() 
@@ -50,8 +50,9 @@ $('#registerForm').submit(function(event ) {
 $(document).ready(function() {
     checkIfLogged();
 });
-function setSessionStorage(){
-    chrome.runtime.sendMessage({action: "setSessionStorage"}, function(response) {
+function setSessionStorage(userid){
+    var username = getUsername();
+    chrome.runtime.sendMessage({action: "setSessionStorage",userid:userid,username:username}, function(response) {
         if(response != undefined){
             console.log(response);
             if(response === "Success"){
@@ -60,6 +61,15 @@ function setSessionStorage(){
         }
     });
 };
+function getUsername(){
+    var $inputs = $('#loginForm :input');
+
+    var values = {};
+    $inputs.each(function() {
+        values[this.name] = $(this).val();
+    });
+    return values["username"];
+}
 function checkIfLogged(){
     console.log("Check if logged");
     chrome.runtime.sendMessage({action: "checkIfLogged"}, function(response) {

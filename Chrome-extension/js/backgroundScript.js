@@ -15,7 +15,7 @@ function getPlayerId(){
                 //                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
                 //
                 //                chrome.browserAction.setBadgeText({text: 'Play'});
-               chrome.browserAction.setIcon({path: '../img/icon3.png'});
+                chrome.browserAction.setIcon({path: '../img/icon3.png'});
             }
             else{
                 //                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
@@ -28,25 +28,41 @@ function getPlayerId(){
 };
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     console.log("In getCredential with request: "+request);
-    if (request.action === "getCredentials"){
-        console.log(request.data);
-        getCredentialsAJAXCall(request, sender, sendResponse);
-        return true;
-    }
-    if(request.action === "registerCredentials"){
-        console.log(request.data);
-        registerCredentialsAJAXCall(request, sender, sendResponse);
-        return true;
-    }
-    if(request.action === "setSessionStorage"){
-        sendResponse(setSessionStorage(request));
-    }
-    if(request.action === "checkIfLogged"){
-        sendResponse(checkIfLogged());
-    }
-    if(request.action === "logout"){
-        logout(request, sender, sendResponse);
-        return true;
+    switch (request.action){
+        case "getCredentials":
+            console.log(request.data);
+            getCredentialsAJAXCall(request, sender, sendResponse);
+            return true;
+            break;
+        case "registerCredentials":
+            console.log(request.data);
+            registerCredentialsAJAXCall(request, sender, sendResponse);
+            return true;
+            break;
+        case "setSessionStorage":
+            sendResponse(setSessionStorage(request));
+            return true;
+            break;
+        case "checkIfLogged":
+            sendResponse(checkIfLogged());
+            return true;
+            break;
+        case "logout":
+            logout(request, sender, sendResponse);
+            return true;
+            break;
+        case "getUserId":
+            getUserId(request, sender, sendResponse);
+            return true;
+            break;
+        case "addVideo":
+            addVideo(request, sender, sendResponse);
+            return true;
+            break;
+        case "getUsername":
+            getUsername(request,sender,sendResponse);
+            return true;
+            break;
     }
 });
 function getCredentialsAJAXCall(request, sender, sendResponse){  
@@ -81,13 +97,36 @@ function registerCredentialsAJAXCall(request, sender, sendResponse){
     });
 
 };
-function setSessionStorage(){
+function addVideo(request, sender, sendResponse){
+  $.ajax({
+        url: 'http://25.156.172.66:8080/vinno/videos/add',
+        type: 'POST',
+        contentType: 'application/json',
+        data: request.data,
+        success: function(response){
+            console.log(response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);   
+        }
+    });
+}
+function setSessionStorage(request){
     sessionStorage["login"] = true;
+    sessionStorage["userid"] = request.userid;
+    sessionStorage["username"] = request.username;
     if(sessionStorage["login"] != undefined){
         return "Success";
     }
     return "Fail";
 
+}
+function getUserId(request, sender, sendResponse){
+    sendResponse(sessionStorage["userid"]);
+}
+function getUsername(request, sender, sendResponse){
+    sendResponse(sessionStorage["username"]);
 }
 function checkIfLogged(){
     console.log("session storage is "+sessionStorage["login"]);
@@ -98,6 +137,7 @@ function checkIfLogged(){
 }
 function logout(request, sender, sendResponse){
     sessionStorage["login"] = undefined;
+    sessionStorage["userid"] = undefined;
     $.ajax({
         url: 'http://25.156.172.66:8080/vinno/users/logout',
         type: 'POST',

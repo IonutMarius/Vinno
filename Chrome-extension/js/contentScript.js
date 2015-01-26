@@ -1,8 +1,9 @@
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     switch (request.action){
-        case "getTitle":
+        case "getVideoInfo":
             var title = document.getElementById("eow-title").getAttribute("title");
-            sendResponse({title: title});
+            var url = document.URL;
+            sendResponse({title: title,url:url});
             break;
         case "getIdPlayer":
             var playerId = document.getElementById("player").getAttribute("id");
