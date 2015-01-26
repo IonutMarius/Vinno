@@ -45,27 +45,29 @@ function addVideo(){
 
 }
 function loadVideos(){
-    var tempLocalStorage = {};
-    var i = 0;
-    var sKey;
-    for (; sKey = window.localStorage.key(i); i++) {
-        tempLocalStorage[sKey] = window.localStorage.getItem(sKey);
-    }
-    var html = "<h2>My Videos</h2><hr>";
-    for(item in tempLocalStorage){
-        var video = JSON.parse(tempLocalStorage[item]);
-        html += "<img src='"+video["thumbnailUrl"]+"' width='320px' height='200px' /> <p>"+video["title"]+"</p><button>Edit</button><button>Delete</button><hr>";
-
-    }
-    $("#loadedVideos").html(html);
+    var userid = window.userId;
+    chrome.runtime.sendMessage({action: "getVideos",data:userid}, function(response) {
+        if(response != undefined){
+            console.log(response);
+            console.log(response.message);
+            if(response.data != undefined){
+                var html = "";
+                for(var i = 0;i<response.data.length;i++){
+                    html += "<div class='video'><div class='details'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><span class='video-title'>"+response.data[i].title+"</span><div class='edit-button'><a href='#' class='btn btn-info btn-mini'><i class='icon-white icon-pencil'></i></a></div><div class='delete-button'><a href='#' class='btn btn-danger btn-mini'><i class='icon-white icon-remove'></i></a></div></div></div>";
+                }
+                $("#loadedVideos").html(html);
+            }
+        }
+    });
 }
 function getUserId(){
     chrome.runtime.sendMessage({action: "getUserId"}, function(response) {
         window.userId = response;
+        loadVideos();
     });
 }
 function getUsername(){
-     chrome.runtime.sendMessage({action: "getUsername"}, function(response) {
+    chrome.runtime.sendMessage({action: "getUsername"}, function(response) {
         window.username = response;
     });
 }
@@ -80,10 +82,9 @@ function logout(){
     });
 }
 $(document).ready(function() {
-    getVideoID();
-    loadVideos();
     getUserId();
     getUsername();
+    getVideoID();
     $("#testButton").on("click", function(){
         addVideo();
     });

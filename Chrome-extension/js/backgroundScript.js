@@ -63,6 +63,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             getUsername(request,sender,sendResponse);
             return true;
             break;
+        case "getVideos":
+            getVideos(request,sender,sendResponse);
+            return true;
+            break;
     }
 });
 function getCredentialsAJAXCall(request, sender, sendResponse){  
@@ -80,7 +84,19 @@ function getCredentialsAJAXCall(request, sender, sendResponse){
         }
     });
 };
-
+function getVideos(request, sender, sendResponse){  
+    $.ajax({
+        url: 'http://25.156.172.66:8080/vinno/videos/get/'+request.data,
+        type: 'GET',
+        success: function(response){
+            console.log(response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);   
+        }
+    });
+};
 function registerCredentialsAJAXCall(request, sender, sendResponse){  
     $.ajax({
         url: 'http://25.156.172.66:8080/vinno/users/register',
