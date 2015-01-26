@@ -27,8 +27,8 @@ public class VideoController {
 		ResponseBody<Long> respBody = null;
 		
 		Long videoId = this.videoDao.save(video).getId();
-		respBody = new ResponseBody<Long>(videoId, "Video saved");
-		response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
+		respBody = new ResponseBody<Long>(videoId, "Video added");
+		response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.CREATED);
 		
 		return response;
 	}
