@@ -55,6 +55,10 @@ body{
     display: block;
 }
 
+.video{
+    margin-top: 15px;
+}
+
 .thumbnail{
     width: 30%;
     height: auto;
@@ -64,16 +68,19 @@ body{
 }
 
 .button-container{
-    width: 10%;
+    width: 15%;
     float: left;
 }
 
-.button-container > button{
-    margin-left: 20px;
-    margin-right: 20px;
+.button-container > a{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 90%;
 }
 
 .video-title{
-    width: 60%;
+    margin-top: 5px;
+    margin-left: 3%;
+    width: 52%;
     float: left;
 }
