@@ -2,7 +2,55 @@ html{
     width: 350px;
     height: 570px;
 }
+
 body{
     width: 100%;
     height: 100%;
+}
+
+.vinno-header{
+    height: 80px;
+    padding: 10px;
+    margin: 0px;
+}
+
+.vinno-header-left{
+    width: 80%;
+    height: 100%;
+    float: left;
+    margin: 0;
+    padding: 0;
+}
+
+.vinno-header-right{
+    width: 20%;
+    height: 100%;
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+
+.logo-img{
+    height: 90%;
+    width: auto;
+}
+
+.ext-name{
+    height: 90%;
+    display: inline-block;
+    margin: 0;
+    padding: 0px 0px 0px 10px;
+}
+
+.username{
+    margin: auto;   
+}
+
+#logoutBtn{
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+    display: block;
 }

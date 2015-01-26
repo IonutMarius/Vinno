@@ -26,6 +26,9 @@ public class Video implements Serializable{
 	@Column(name = "video_url")
 	private String videoURL;
 	
+	@Column(name = "thumbnail_url")
+	private String thumbnailUrl;
+
 	@Column(name = "title")
 	private String title;
 	
@@ -52,5 +55,11 @@ public class Video implements Serializable{
 	}
 	public void setVideoURL(String videoURL) {
 		this.videoURL = videoURL;
-	}	
+	}		
+	public String getThumbnailUrl() {
+		return thumbnailUrl;
+	}
+	public void setThumbnailUrl(String thumbnailUrl) {
+		this.thumbnailUrl = thumbnailUrl;
+	}
 }
