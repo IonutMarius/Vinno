@@ -12,12 +12,16 @@ function getPlayerId(){
     chrome.tabs.getSelected(null,function(tab){
         chrome.tabs.sendRequest(tab.id,{action:"getIdPlayer"}, function(response){
             if(response != undefined){
-                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-                chrome.browserAction.setBadgeText({text: 'Play'});
+                //                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+                //
+                //                chrome.browserAction.setBadgeText({text: 'Play'});
+               chrome.browserAction.setIcon({path: '../img/icon3.png'});
             }
             else{
-                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-                chrome.browserAction.setBadgeText({text: ''})
+                //                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+                //                chrome.browserAction.setBadgeText({text: ''})
+                chrome.browserAction.setIcon({path: '../img/icon2.png'});
+
             }
         });
     });
@@ -83,7 +87,7 @@ function setSessionStorage(){
         return "Success";
     }
     return "Fail";
-    
+
 }
 function checkIfLogged(){
     console.log("session storage is "+sessionStorage["login"]);
@@ -94,7 +98,7 @@ function checkIfLogged(){
 }
 function logout(request, sender, sendResponse){
     sessionStorage["login"] = undefined;
-       $.ajax({
+    $.ajax({
         url: 'http://25.156.172.66:8080/vinno/users/logout',
         type: 'POST',
         contentType: 'application/json',

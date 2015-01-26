@@ -34,7 +34,12 @@ $('#registerForm').submit(function(event ) {
             console.log(response);
             console.log(response.message);
             if(response.message === "User created"){
-                window.location.replace("../pages/login.html");
+                $(".login-message").html("<p style='color:red'>"+response.message+"</p>");
+                setTimeout(
+                    function() 
+                    {  
+                        window.location.replace("../pages/login.html");
+                    }, 1500);
             }
             else{
                 $(".login-message").html("<p style='color:red'>"+response.message+"</p>");
