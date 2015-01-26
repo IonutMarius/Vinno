@@ -69,6 +69,7 @@ function getUserId(){
 function getUsername(){
     chrome.runtime.sendMessage({action: "getUsername"}, function(response) {
         window.username = response;
+        $(".username").html(response);
     });
 }
 function logout(){
