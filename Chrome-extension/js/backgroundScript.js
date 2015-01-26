@@ -12,15 +12,15 @@ function getPlayerId(){
     chrome.tabs.getSelected(null,function(tab){
         chrome.tabs.sendRequest(tab.id,{action:"getIdPlayer"}, function(response){
             if(response != undefined){
-                //                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-                //
-                //                chrome.browserAction.setBadgeText({text: 'Play'});
-                chrome.browserAction.setIcon({path: '../img/icon3.png'});
+                                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+                
+                                chrome.browserAction.setBadgeText({text: 'Play'});
+                //chrome.browserAction.setIcon({path: '../img/icon3.png'});
             }
             else{
-                //                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-                //                chrome.browserAction.setBadgeText({text: ''})
-                chrome.browserAction.setIcon({path: '../img/icon2.png'});
+                                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+                                chrome.browserAction.setBadgeText({text: ''})
+                //chrome.browserAction.setIcon({path: '../img/icon2.png'});
 
             }
         });
