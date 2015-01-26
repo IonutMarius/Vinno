@@ -42,14 +42,12 @@ body{
     padding: 0px 0px 0px 10px;
 }
 
-.username{
-    margin: auto;   
+.username{    
+    text-align: center;
 }
 
-#logoutBtn{
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
+#logoutBtn{    
+    text-align: center;
     padding-left: 0;
     padding-right: 0;
     display: block;
