@@ -1,3 +1,4 @@
+checkIfLogged();
 $('#loginForm').submit(function(event ) {
     event.preventDefault();
     var $inputs = $('#loginForm :input');
@@ -46,9 +47,6 @@ $('#registerForm').submit(function(event ) {
             }
         }
     });
-});
-$(document).ready(function() {
-    checkIfLogged();
 });
 function setSessionStorage(userid){
     var username = getUsername();
