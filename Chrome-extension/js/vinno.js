@@ -50,12 +50,12 @@ function loadVideos(){
     var userid = window.userId;
     chrome.runtime.sendMessage({action: "getVideos",data:userid}, function(response) {
         if(response != undefined){
-            console.log(response);
+            console.log("videos are "+response.data);
             console.log(response.message);
             if(response.data != undefined){
                 var html = "<h5>My videos</h5>";
                 for(var i = 0;i<response.data.length;i++){
-                    html += "<div class='video'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><a href='#' class='btn btn-info btn-xs editBtn'>Edit</a><a href='#' class='btn btn-danger btn-xs deleteBtn'>Delete</a></div></div></div></div>";
+                    html += "<div class='video' data-url='"+response.data[i].videoUrl+"'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'>Edit</button><button class='btn btn-danger btn-xs deleteBtn'>Delete</button></div></div></div></div>";
                 }
                 $("#loadedVideos").html(html);
             }
@@ -84,6 +84,9 @@ function logout(){
         }
     });
 }
+function deleteVideo(){
+    
+}
 $(document).ready(function() {
     getUserId();
     getUsername();
@@ -94,7 +97,10 @@ $(document).ready(function() {
     $("#logoutBtn").on("click", function(){
         logout();
     });
-    $(".deleteBtn").on("click",function(){
+    $(".deleteBtn").on("click",function(e){
+        e.preventDefault();
+        var videoUrl = $(this).closest(".video").attr("data-url");
+        console.log(videoUrl);
         deleteVideo();
     });
 });
