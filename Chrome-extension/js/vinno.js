@@ -58,7 +58,7 @@ function loadVideos(){
             if(response.data != undefined){
                 var html = "<h5>My videos</h5>";
                 for(var i = 0;i<response.data.length;i++){
-                    html += "<div class='video' data-id='"+response.data[i].id+"' data-thumbnail='"+response.data[i].thumbnailUrl+"' data-title='"+response.data[i].title+"'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger btn-xs deleteBtn'><span class='glyphicon glyphicon-remove'></span></button></div></div></div></div>";
+                    html += "<div class='video' data-id='"+response.data[i].id+"' data-thumbnail='"+response.data[i].thumbnailUrl+"' data-title='"+response.data[i].title+"'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger btn-xs deleteBtn'><span class='glyphicon glyphicon-remove'></span></button></div></div><div class='annotations hidden'><div class='tags'><p>Tags</p></div><div class='comments'><p>Comments</p></div><div class='related-videos'><p>Related videos</p></div><div class='people'><p>People</p></div></div></div></div>";
                 }
                 $("#loadedVideos").html(html);
                 $(".deleteBtn").on("click",function(){
@@ -69,10 +69,43 @@ function loadVideos(){
                     var videoId = $(this).closest(".video").data("id");
                     var thumbnailUrl = $(this).closest(".video").data("thumbnail");
                     var title = $(this).closest(".video").data("title");
-                    var videoId = $(this).closest(".video").data("id");
                     var username = window.username;
                     addValuesForEditInSS(thumbnailUrl,title,username,videoId);
                     window.location.replace("../pages/edit.html");
+                });
+                $(".video").on("click", function(){                       
+                    var videoId = $(this).closest(".video").data("id");
+                    var userId = window.userId;
+                    console.log($(this).find(".tags"));
+                    chrome.runtime.sendMessage({action: "getAnnotations",userId:userId,videoId:videoId}, function(response) {
+                        if(response != undefined){
+                            if(response.data != undefined){
+
+                                $('.annotations').addClass('hidden');
+                                $(this).find('annotations').removeClass('hidden');
+
+                                for(var i = 0;i<response.data.length;i++){
+                                    switch(response.data[i].type){
+                                        case "tag":
+                                            $(this).find(".tags").append("<div class='annotation-small ann-tag'>" + response.data[i].data + "</div>");
+                                            break;
+                                        case "comment":
+                                            $(this).find(".comments").append("<div class='annotation-small ann-comment'>" + response.data[i].data + "</div>");
+                                            break;
+                                        case "related-video":
+                                            $(this).find(".related-videos").append("<div class='annotation-small ann-related-video'>" + response.data[i].data + "</div>");
+                                            break;
+                                        case "person":
+                                            $(this).find(".people").append("<div class='annotation-small ann-person'>" + response.data[i].data + "</div>");
+                                            break;
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                                              );
+
                 });
             }
         }

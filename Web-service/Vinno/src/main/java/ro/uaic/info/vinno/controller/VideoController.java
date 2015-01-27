@@ -46,7 +46,7 @@ public class VideoController {
 	}
 	
 	@RequestMapping(value = "/getAll/{userId}", method = RequestMethod.GET)
-	public ResponseBody<List<Video>> getVideos(@PathVariable(value = "userId") Long userId){
+	public ResponseBody<List<Video>> getVideos(@PathVariable(value = "userId") Long userId, HttpSession httpSession){
 		ResponseBody<List<Video>> respBody = null;
 		
 		List<Video> videos = videoDao.get(userId);
@@ -56,12 +56,13 @@ public class VideoController {
 	}
 	
 	@RequestMapping(value = "/{videoId}", method = RequestMethod.DELETE)
-	public ResponseBody<Boolean> deleteVideo(@PathVariable(value = "videoId") Long videoId){
+	public ResponseBody<Boolean> deleteVideo(@PathVariable(value = "videoId") Long videoId, HttpSession httpSession){
 		ResponseBody<Boolean> respBody = null;
 		Boolean confirmation = true;
 		String msg = "Success";
 		
 		this.videoDao.delete(videoId);
+		this.annotationDao.deleteAll(videoId);
 		
 		respBody = new ResponseBody<Boolean>(confirmation, msg);
 		

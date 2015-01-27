@@ -1,5 +1,7 @@
 package ro.uaic.info.vinno.dao;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,16 @@ public class AnnotationDaoImpl implements AnnotationDao{
 		}
 		
 		return createdAnnotation;
+	}
+
+	@Override
+	public void deleteAll(Long videoId) {
+		this.repository.clearAnnotations(videoId);		
+	}
+
+	@Override
+	public List<Annotation> getAll(Long userId, Long videoId) {
+		return this.repository.getByUserIdAndVideoId(userId, videoId);
 	}
 
 }
