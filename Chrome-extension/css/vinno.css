@@ -166,5 +166,6 @@ h4{
     display: block;
 }
 .editTitle{
-    font-size:13px !important;
+    font-size:16px;
+    width:60%;
 }
