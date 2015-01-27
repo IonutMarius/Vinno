@@ -172,3 +172,6 @@ h4{
 .closeBtn{
     float:right;
 }
+.deleteAnnotationBtn{
+    margin-left:13px;
+}

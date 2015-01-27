@@ -79,6 +79,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             addAnnotation(request,sender,sendResponse);
             return true;
             break;
+        case "deleteAnnotation":
+            deleteAnnotation(request,sender,sendResponse);
+            return true;
+            break;
     }
 });
 function getCredentialsAJAXCall(request, sender, sendResponse){  
@@ -179,6 +183,19 @@ function checkIfLogged(){
 function deleteVideo(request,sender,sendResponse){
     $.ajax({
         url: 'http://25.156.172.66:8080/vinno/videos/'+request.data,
+        type: 'DELETE',
+        success: function(response){
+            console.log(response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);   
+        }
+    });
+}
+function deleteAnnotation(request,sender,sendResponse){
+    $.ajax({
+        url: 'http://25.156.172.66:8080/vinno/annotation/'+request.data,
         type: 'DELETE',
         success: function(response){
             console.log(response);

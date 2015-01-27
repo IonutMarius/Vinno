@@ -58,8 +58,28 @@ function loadAnnotations(){
                             annotationClass = "people-tags";
                             break;
                     }
-                    classVariable.append("<div class='"+annotationClass+"'>"+response.data[i].data+"</div>");
+                    if(response.data[i].type === "related-video"){
+                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'><a href='"+response.data[i].data+"'>"+response.data[i].data+"</a><button class='btn btn-danger btn-xs deleteAnnotationBtn'><span class='glyphicon glyphicon-remove'></span></button></div>");      
+                    }
+                    else{
+                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'>"+response.data[i].data+"<button class='btn btn-danger btn-xs deleteAnnotationBtn'><span class='glyphicon glyphicon-remove'></span></button></div>");
+                    }
+
+                    $(".deleteAnnotationBtn").on("click", function(){
+                        var annotationId = $(this).closest("div").data("annotation");
+                        deleteAnnotation(annotationId);
+                    });
                 }
+            }
+        }
+    });
+}
+function deleteAnnotation(annotationId){
+    chrome.runtime.sendMessage({action: "deleteAnnotation",data:annotationId}, function(response) {
+        if(response != undefined){
+            console.log(response);
+            if(response.message === "Success"){
+                window.location.replace("../pages/edit.html");
             }
         }
     });
