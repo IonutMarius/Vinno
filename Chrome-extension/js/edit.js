@@ -59,7 +59,9 @@ function loadAnnotations(){
                             break;
                     }
                     if(response.data[i].type === "related-video"){
-                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'><a href='"+response.data[i].data+"'>"+response.data[i].data+"</a><button class='btn btn-danger btn-xs deleteAnnotationBtn'><span class='glyphicon glyphicon-remove'></span></button></div>");      
+                        var videoId = getVideoIdFromUrl(response.data[i].data);
+                        var thumbnailUrl = "http://i1.ytimg.com/vi/"+videoId+"/0.jpg";
+                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'><img src='"+thumbnailUrl+"' class ='thumbnail' /><a href='"+response.data[i].data+"' class='video-title'>"+response.data[i].data+"</a><button class='btn btn-danger btn-xs deleteAnnotationBtn'><span class='glyphicon glyphicon-remove'></span></button></div>");      
                     }
                     else{
                         classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'>"+response.data[i].data+"<button class='btn btn-danger btn-xs deleteAnnotationBtn'><span class='glyphicon glyphicon-remove'></span></button></div>");
@@ -83,4 +85,9 @@ function deleteAnnotation(annotationId){
             }
         }
     });
+}
+function getVideoIdFromUrl(url){
+    var match = url.match(/[?&]v=([^&]+)/);
+    videoId = match[1];
+    return videoId;
 }
