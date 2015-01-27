@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ro.uaic.info.vinno.bean.ResponseBody;
 import ro.uaic.info.vinno.bean.Video;
+import ro.uaic.info.vinno.dao.AnnotationDao;
 import ro.uaic.info.vinno.dao.VideoDao;
 
 @RestController
@@ -22,6 +23,9 @@ public class VideoController {
 
 	@Autowired
 	private VideoDao videoDao;	
+	
+	@Autowired
+	private AnnotationDao annotationDao;
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ResponseBody<Long> addVideo(@RequestBody Video video, HttpSession httpSession){
