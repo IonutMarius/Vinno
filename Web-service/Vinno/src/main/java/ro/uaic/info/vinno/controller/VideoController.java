@@ -54,9 +54,11 @@ public class VideoController {
 	@RequestMapping(value = "/{videoId}", method = RequestMethod.DELETE)
 	public ResponseBody<Boolean> deleteVideo(@PathVariable(value = "videoId") Long videoId){
 		ResponseBody<Boolean> respBody = null;
-		
 		Boolean confirmation = true;
 		String msg = "Success";
+		
+		this.videoDao.delete(videoId);
+		
 		respBody = new ResponseBody<Boolean>(confirmation, msg);
 		
 		return respBody;
