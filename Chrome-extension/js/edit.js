@@ -19,4 +19,10 @@ $(document).ready(function() {
             }
         });
     });
+    modifyEditValues();
 });
+function modifyEditValues(){
+    $(".editThumbnail").attr("src",sessionStorage["thumbnailUrl"]);
+    $(".editTitle").html(sessionStorage["title"]);
+    $(".editUsername").html(sessionStorage["username"]);
+}

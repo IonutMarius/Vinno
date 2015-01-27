@@ -118,11 +118,6 @@ function addValuesForEditInSS(thumbnailUrl,title,username,videoId){
     sessionStorage["videoId"] = videoId;
 
 }
-function modifyEditValues(){
-    $(".editThumbnail").attr("src",sessionStorage["thumbnailUrl"]);
-    $(".editTitle").html(sessionStorage["title"]);
-    $(".editUsername").html(sessionStorage["username"]);
-}
 $(document).ready(function() {
     getUserId();
     getUsername();
@@ -130,7 +125,4 @@ $(document).ready(function() {
     $("#logoutBtn").on("click", function(){
         logout();
     });
-    if(sessionStorage["thumbnailUrl"]!=undefined){
-        modifyEditValues();
-    }
 });
