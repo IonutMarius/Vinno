@@ -82,3 +82,19 @@ body{
     width: 50%;
     float: left;
 }
+
+.separator{
+    width: 100%;
+    border-bottom: 1px solid #eeeeee;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+#currentPlaying{
+    margin: 12px 0px 0px 0px;
+    height: 200px;
+}
+
+#loadedVideos{
+    height: 200px;
+}
