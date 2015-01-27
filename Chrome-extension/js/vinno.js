@@ -5,7 +5,7 @@ function getVideoInfo (videoId) {
             if(response != undefined){
                 var imageUrl = "http://i1.ytimg.com/vi/"+videoId+"/0.jpg";
                 console.log(imageUrl);
-                var html = "<h4>Currently playing: </h4><img src='"+imageUrl+"' width='320px' height='200px'/> <p id='content' data-value='"+response.title+"' data-turl='"+imageUrl+"'data-url='"+response.url+"' >"+response.title+" </p>";
+                var html = "<h5>Currently playing: </h5><img src='"+imageUrl+"' width='320px' height='200px'/> <p id='content' data-value='"+response.title+"' data-turl='"+imageUrl+"'data-url='"+response.url+"' >"+response.title+" </p>";
                 console.log(html);
                 $("#currentlyPlaying").removeClass("hidden");
                 $(".separator").removeClass("hidden");
@@ -53,9 +53,9 @@ function loadVideos(){
             console.log(response);
             console.log(response.message);
             if(response.data != undefined){
-                var html = "<h4>My videos</h4>";
+                var html = "<h5>My videos</h5>";
                 for(var i = 0;i<response.data.length;i++){
-                    html += "<div class='video'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><a href='#' class='btn btn-info btn-xs'>Edit</a><a href='#' class='btn btn-danger btn-xs'>Delete</a></div></div></div></div>";
+                    html += "<div class='video'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><a href='#' class='btn btn-info btn-xs editBtn'>Edit</a><a href='#' class='btn btn-danger btn-xs deleteBtn'>Delete</a></div></div></div></div>";
                 }
                 $("#loadedVideos").html(html);
             }
@@ -93,5 +93,8 @@ $(document).ready(function() {
     });
     $("#logoutBtn").on("click", function(){
         logout();
+    });
+    $(".deleteBtn").on("click",function(){
+        deleteVideo();
     });
 });
