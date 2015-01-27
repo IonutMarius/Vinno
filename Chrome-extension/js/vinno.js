@@ -7,6 +7,8 @@ function getVideoInfo (videoId) {
                 console.log(imageUrl);
                 var html = "<h4>Currently playing: </h4><img src='"+imageUrl+"' width='320px' height='200px'/> <p id='content' data-value='"+response.title+"' data-turl='"+imageUrl+"'data-url='"+response.url+"' >"+response.title+" </p>";
                 console.log(html);
+                $("#currentlyPlaying").removeClass("hidden");
+                $(".separator").removeClass("hidden");
                 $("#addVideoBtn").before(html);
             }
 

@@ -151,6 +151,9 @@ function checkIfLogged(){
     }
     return "Fail";
 }
+function saveVideosToSessionStorage(){
+    
+}
 function logout(request, sender, sendResponse){
     sessionStorage["login"] = undefined;
     sessionStorage["userid"] = undefined;
