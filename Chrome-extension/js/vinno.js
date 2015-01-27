@@ -65,6 +65,10 @@ function loadVideos(){
                     var videoId = $(this).closest(".video").data("id");
                     deleteVideo(videoId);
                 });
+                $(".editBtn").on("click",function(){
+                    var videoId = $(this).closest(".video").data("id");
+                    editVideo(videoId);
+                });
             }
         }
     });
@@ -100,6 +104,9 @@ function deleteVideo(videoId){
             }
         }
     });
+}
+function editVideo(videoId){
+     window.location.replace("../pages/edit.html");
 }
 $(document).ready(function() {
     getUserId();
