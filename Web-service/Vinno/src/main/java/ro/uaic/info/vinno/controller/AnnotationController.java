@@ -54,4 +54,15 @@ public class AnnotationController {
 		return respBody;
 	}
 
+	@RequestMapping(value = "/{annotationId}", method = RequestMethod.DELETE)
+	public ResponseBody<Boolean> delete(@PathVariable(value = "annotationId") Long annotationId, HttpSession httpSession){
+		ResponseBody<Boolean> respBody = null;		
+		String msg = "Success";
+		
+		this.annotationDao.delete(annotationId);
+		
+		respBody = new ResponseBody<Boolean>(true, msg);
+		
+		return respBody;	
+	}
 }

@@ -41,4 +41,9 @@ public class AnnotationDaoImpl implements AnnotationDao{
 		return this.repository.getByUserIdAndVideoId(userId, videoId);
 	}
 
+	@Override
+	public void delete(Long annotationId) {
+		repository.delete(annotationId);		
+	}
+
 }

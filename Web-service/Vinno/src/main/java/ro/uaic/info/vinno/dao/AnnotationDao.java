@@ -8,4 +8,5 @@ public interface AnnotationDao {
 	Annotation save(Annotation annotation);
 	void deleteAll(Long videoId);
 	List<Annotation> getAll(Long userId, Long videoId);
+	void delete(Long annotationId);
 }
