@@ -175,3 +175,6 @@ h4{
 .deleteAnnotationBtn{
     margin-left:13px;
 }
+.annotations{
+    display: none;
+}
