@@ -35,7 +35,7 @@ body{
     width: auto;
 }
 
-.ext-name{
+.page-title{
     height: 90%;
     display: inline-block;
     margin: 0;
@@ -66,21 +66,20 @@ body{
 }
 
 .button-container{
-    width: 17%;
+    width: 11%;
     float: left;
 }
 
-.button-container > a{
+.button-container > button{
     margin-top: 5px;
     margin-bottom: 5px;
     width: 100%;
-    font-size: 11px;
 }
 
 .video-title{
     margin-top: 0px;
     margin-left: 3%;
-    width: 50%;
+    width: 56%;
     float: left;
     font-size: 13px !important;
 }
@@ -115,4 +114,8 @@ body{
 
 h4{
     text-align: center;
+}
+
+.save-btn{
+    margin-left: 15px;
 }

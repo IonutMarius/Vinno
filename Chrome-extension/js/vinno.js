@@ -54,7 +54,7 @@ function loadVideos(){
             if(response.data != undefined){
                 var html = "<h5>My videos</h5>";
                 for(var i = 0;i<response.data.length;i++){
-                    html += "<div class='video' data-id='"+response.data[i].id+"'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'>Edit</button><button class='btn btn-danger btn-xs deleteBtn'>Delete</button></div></div></div></div>";
+                    html += "<div class='video' data-id='"+response.data[i].id+"'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger btn-xs deleteBtn'><span class='glyphicon glyphicon-remove'></span></button></div></div></div></div>";
                 }
                 $("#loadedVideos").html(html);
                 $(".deleteBtn").on("click",function(){
@@ -88,7 +88,7 @@ function logout(){
     });
 }
 function deleteVideo(videoId){
- chrome.runtime.sendMessage({action: "deleteVideo",data:videoId}, function(response) {
+    chrome.runtime.sendMessage({action: "deleteVideo",data:videoId}, function(response) {
         if(response != undefined){
             console.log(response);
             if(response.message === "Success"){
