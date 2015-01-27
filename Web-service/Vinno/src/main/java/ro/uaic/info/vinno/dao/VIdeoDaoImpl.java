@@ -40,4 +40,9 @@ public class VIdeoDaoImpl implements VideoDao {
 		return videos;
 	}
 
+	@Override
+	public void delete(Long videoId) {
+		repository.delete(videoId);
+	}
+
 }
