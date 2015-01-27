@@ -12,14 +12,14 @@ function getPlayerId(){
     chrome.tabs.getSelected(null,function(tab){
         chrome.tabs.sendRequest(tab.id,{action:"getIdPlayer"}, function(response){
             if(response != undefined){
-                                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-                
-                                chrome.browserAction.setBadgeText({text: 'Play'});
+                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+
+                chrome.browserAction.setBadgeText({text: 'Play'});
                 //chrome.browserAction.setIcon({path: '../img/icon3.png'});
             }
             else{
-                                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
-                                chrome.browserAction.setBadgeText({text: ''})
+                chrome.browserAction.setBadgeBackgroundColor({ color: [255, 0, 0, 255] });
+                chrome.browserAction.setBadgeText({text: ''})
                 //chrome.browserAction.setIcon({path: '../img/icon2.png'});
 
             }
@@ -71,8 +71,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             getLocalVideos(request,sender,sendResponse);
             return true;
             break;
-        case "updateVideos":
-            updateLocalVideos(request,sender,sendResponse);
+        case "deleteVideo":
+            deleteVideo(request,sender,sendResponse);
             return true;
             break;
     }
@@ -97,8 +97,8 @@ function getVideos(request, sender, sendResponse){
         url: 'http://25.156.172.66:8080/vinno/videos/getAll/'+request.data,
         type: 'GET',
         success: function(response){
-            console.log(response);
-            saveVideosToSessionStorage(response);
+            console.log("getting videsos: "+response);
+            saveVideosToSessionStorage(JSON.stringify(response.data));
             sendResponse(response);
         },
         error: function(e){
@@ -123,7 +123,7 @@ function registerCredentialsAJAXCall(request, sender, sendResponse){
 
 };
 function addVideo(request, sender, sendResponse){
-  $.ajax({
+    $.ajax({
         url: 'http://25.156.172.66:8080/vinno/videos/add',
         type: 'POST',
         contentType: 'application/json',
@@ -166,8 +166,27 @@ function saveVideosToSessionStorage(videos){
 function  getLocalVideos(request,sender,sendResponse){
     sendResponse(sessionStorage["videos"]);
 }
-function updateVideos(request,sender,sendResponse){
-    sessionStorage["videos"] = request.data;
+function deleteVideo(request,sender,sendResponse){
+    var localVideos = JSON.parse(sessionStorage["videos"]);
+    console.log("before:" +localVideos);
+    for(var i = 0;i<localVideos.length;i++){
+        if(localVideos[i].id === request.data){
+            localVideos.splice(i,1);
+        }
+    }
+    console.log("after:" +localVideos);
+    sessionStorage["videos"] = JSON.stringify(localVideos);
+    $.ajax({
+        url: 'http://25.156.172.66:8080/vinno/videos/'+request.data,
+        type: 'DELETE',
+        success: function(response){
+            console.log(response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);   
+        }
+    });
 }
 function logout(request, sender, sendResponse){
     sessionStorage["login"] = undefined;

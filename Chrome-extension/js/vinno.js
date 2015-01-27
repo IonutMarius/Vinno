@@ -50,14 +50,17 @@ function loadVideos(){
     var userid = window.userId;
     chrome.runtime.sendMessage({action: "getVideos",data:userid}, function(response) {
         if(response != undefined){
-            console.log("videos are "+response.data);
             console.log(response.message);
             if(response.data != undefined){
                 var html = "<h5>My videos</h5>";
                 for(var i = 0;i<response.data.length;i++){
-                    html += "<div class='video' data-url='"+response.data[i].videoUrl+"'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'>Edit</button><button class='btn btn-danger btn-xs deleteBtn'>Delete</button></div></div></div></div>";
+                    html += "<div class='video' data-id='"+response.data[i].id+"'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'>Edit</button><button class='btn btn-danger btn-xs deleteBtn'>Delete</button></div></div></div></div>";
                 }
                 $("#loadedVideos").html(html);
+                $(".deleteBtn").on("click",function(){
+                    var videoId = $(this).closest(".video").data("id");
+                    deleteVideo(videoId);
+                });
             }
         }
     });
@@ -84,8 +87,15 @@ function logout(){
         }
     });
 }
-function deleteVideo(){
-    
+function deleteVideo(videoId){
+ chrome.runtime.sendMessage({action: "deleteVideo",data:videoId}, function(response) {
+        if(response != undefined){
+            console.log(response);
+            if(response.message === "Success"){
+                window.location.replace("../pages/vinno.html");
+            }
+        }
+    });
 }
 $(document).ready(function() {
     getUserId();
@@ -96,11 +106,5 @@ $(document).ready(function() {
     });
     $("#logoutBtn").on("click", function(){
         logout();
-    });
-    $(".deleteBtn").on("click",function(e){
-        e.preventDefault();
-        var videoUrl = $(this).closest(".video").attr("data-url");
-        console.log(videoUrl);
-        deleteVideo();
     });
 });
