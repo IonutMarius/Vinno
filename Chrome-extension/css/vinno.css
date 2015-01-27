@@ -81,6 +81,9 @@ body{
     margin-left: 3%;
     width: 56%;
     float: left;
+}
+
+p{
     font-size: 13px !important;
 }
 
