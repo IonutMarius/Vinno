@@ -1,5 +1,6 @@
 package ro.uaic.info.vinno.controller;
 
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,16 @@ public class AnnotationController {
 	public ResponseBody<Long> addAnnotation(@RequestBody Annotation annotation, HttpSession httpSession){
 		ResponseBody<Long> respBody = null;
 		
-		Long annotationId = this.annotationDao.save(annotation).getId();
-		respBody = new ResponseBody<Long>(annotationId, "Annotation saved");
+		Long annotationId = null;
+		String msg;
+		try {
+			annotationId = this.annotationDao.save(annotation).getId();
+			msg = "Success";
+		} catch (RollbackException e) {
+			e.printStackTrace();
+			msg = "Annotation already added";
+		}
+		respBody = new ResponseBody<Long>(annotationId, msg);
 		
 		return respBody;
 	}

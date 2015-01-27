@@ -2,6 +2,7 @@ package ro.uaic.info.vinno.controller;
 
 import java.util.List;
 
+import javax.persistence.RollbackException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,16 @@ public class VideoController {
 	public ResponseBody<Long> addVideo(@RequestBody Video video, HttpSession httpSession){
 		ResponseBody<Long> respBody = null;
 		
-		Long videoId = this.videoDao.save(video).getId();
-		respBody = new ResponseBody<Long>(videoId, "Video added");
+		Long videoId = null;
+		String msg;
+		try {
+			videoId = this.videoDao.save(video).getId();
+			msg = "Success";
+		} catch (RollbackException e) {
+			e.printStackTrace();
+			msg = "Video already added";
+		}
+		respBody = new ResponseBody<Long>(videoId, msg);
 		
 		return respBody;
 	}
