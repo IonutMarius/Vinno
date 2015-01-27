@@ -195,7 +195,7 @@ function deleteVideo(request,sender,sendResponse){
 }
 function deleteAnnotation(request,sender,sendResponse){
     $.ajax({
-        url: 'http://25.156.172.66:8080/vinno/annotation/'+request.data,
+        url: 'http://25.156.172.66:8080/vinno/annotations/'+request.data,
         type: 'DELETE',
         success: function(response){
             console.log(response);
