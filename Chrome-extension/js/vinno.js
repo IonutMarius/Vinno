@@ -7,9 +7,13 @@ function getVideoInfo (videoId) {
                 console.log(imageUrl);
                 var html = "<h5>Currently playing:</h5> <div class='preview clearfix'><div class='preview-left'><img src='"+imageUrl+"'/></div> <div class='preview-right'><p id='content' data-value='"+response.title+"' data-turl='"+imageUrl+"'data-url='"+response.url+"' >"+response.title+" </p><button id='addVideoBtn' class='btn btn-primary btn-lg'>Add video</button></div</div>";
                 console.log(html);
+
                 $("#currentlyPlaying").removeClass("hidden");
                 $(".separator").removeClass("hidden");
                 $("#currentlyPlaying").append(html);
+                $("#addVideoBtn").on("click", function(){
+                    addVideo();
+                });
             }
 
         });
@@ -101,9 +105,6 @@ $(document).ready(function() {
     getUserId();
     getUsername();
     getVideoID();
-    $("#addVideoBtn").on("click", function(){
-        addVideo();
-    });
     $("#logoutBtn").on("click", function(){
         logout();
     });
