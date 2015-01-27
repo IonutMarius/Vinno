@@ -20,7 +20,7 @@
         </div>
 
         <div class="container main-content">
-            <div class="tags-container jumbotron ">
+            <div class="tags-container jumbotron" data-type="tag">
                 <h5>Tags</h5>
                 <input type="text" class="tag-input">
                 <span class="glyphicon glyphicon-plus-sign save-btn"></span>
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="separator"></div>
-            <div class="comments-container jumbotron ">
+            <div class="comments-container jumbotron " data-type="comment">
                 <h5>Comments</h5>
                 <input type="text" class="comments-input">
                 <span class="glyphicon glyphicon-plus-sign save-btn"></span>
@@ -36,15 +36,17 @@
                 </div>
             </div>
             <div class="separator"></div>
-            <div class="images-container jumbotron">
+            <div class="images-container jumbotron" data-type="image">
                 <h5>Images</h5>
-                <button href="#" class="btn btn-default immage-upload-btn">Upload</button>
+                <span class="btn btn-default btn-file">
+                    Browse <input type="file">
+                </span>
                 <span class="glyphicon glyphicon-plus-sign save-btn"></span>
                 <div class="images">
                 </div>
             </div>
             <div class="separator"></div>
-            <div class="related-videos-container jumbotron">
+            <div class="related-videos-container jumbotron" data-type="related-video">
                 <h5>Related videos</h5>
                 <input type="text" class="video-input">
                 <span class="glyphicon glyphicon-plus-sign save-btn"></span>
@@ -52,7 +54,7 @@
                 </div>
             </div>
             <div class="separator"></div>
-            <div class="people-container jumbotron">
+            <div class="people-container jumbotron" data-type="person">
                 <h5>People</h5>
                 <input type="text" class="people-input">
                 <span class="glyphicon glyphicon-plus-sign save-btn"></span>
@@ -65,7 +67,7 @@
         <script src="../js/jquery.min.js"></script>
         <script src="../js/bootstrap.min.js"></script>
         <script src="../js/contentScript.js"></script>
-        <script src="../js/vinno.js"></script>
+        <script src="../js/edit.js"></script>
 
     </body>
 </html>

@@ -71,6 +71,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             deleteVideo(request,sender,sendResponse);
             return true;
             break;
+        case "addAnnotation":
+            addAnnotation(request,sender,sendResponse);
+            return true;
+            break;
     }
 });
 function getCredentialsAJAXCall(request, sender, sendResponse){  
@@ -182,6 +186,22 @@ function logout(request, sender, sendResponse){
         },
         error: function(e){
             sendResponse(e.statusText);   
+        }
+    });
+}
+
+function addAnnotation(request, sender, sendResponse){
+    $.ajax({
+        url: 'http://25.156.172.66:8080/vinno/annotations/add',
+        type: 'POST',
+        contentType: 'application/json',
+        data: request.data,
+        success: function(response){
+            console.log(response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);
         }
     });
 }
