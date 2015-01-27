@@ -67,6 +67,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             getVideos(request,sender,sendResponse);
             return true;
             break;
+        case "getAnnotations":
+            getAnnotations(request,sender,sendResponse);
+            return true;
+            break;
         case "deleteVideo":
             deleteVideo(request,sender,sendResponse);
             return true;
@@ -105,6 +109,19 @@ function getVideos(request, sender, sendResponse){
         }
     });
 };
+function getAnnotations(request,sender,sendResponse){
+    $.ajax({
+        url: 'http://25.156.172.66:8080/vinno/annotations/'+request.userId+'/'+request.videoId,
+        type: 'GET',
+        success: function(response){
+            console.log("getting videsos: "+response);
+            sendResponse(response);
+        },
+        error: function(e){
+            sendResponse(e.statusText);   
+        }
+    });
+}
 function registerCredentialsAJAXCall(request, sender, sendResponse){  
     $.ajax({
         url: 'http://25.156.172.66:8080/vinno/users/register',
