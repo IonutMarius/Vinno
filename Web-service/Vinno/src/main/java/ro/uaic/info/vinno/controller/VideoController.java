@@ -5,8 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,26 +23,22 @@ public class VideoController {
 	private VideoDao videoDao;	
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ResponseEntity<ResponseBody<Long>> addVideo(@RequestBody Video video, HttpSession httpSession){
-		ResponseEntity<ResponseBody<Long>> response = null;
+	public ResponseBody<Long> addVideo(@RequestBody Video video, HttpSession httpSession){
 		ResponseBody<Long> respBody = null;
 		
 		Long videoId = this.videoDao.save(video).getId();
 		respBody = new ResponseBody<Long>(videoId, "Video added");
-		response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.CREATED);
 		
-		return response;
+		return respBody;
 	}
 	
 	@RequestMapping(value = "/get/{userId}", method = RequestMethod.GET)
-	public ResponseEntity<ResponseBody<List<Video>>> getVideos(@PathVariable(value = "userId") Long userId){
-		ResponseEntity<ResponseBody<List<Video>>> response = null;
+	public ResponseBody<List<Video>> getVideos(@PathVariable(value = "userId") Long userId){
 		ResponseBody<List<Video>> respBody = null;
 		
 		List<Video> videos = videoDao.get(userId);
 		respBody = new ResponseBody<List<Video>>(videos, "All videos");
-		response = new ResponseEntity<ResponseBody<List<Video>>>(respBody, HttpStatus.OK);
 		
-		return response;
+		return respBody;
 	}
 }

@@ -3,8 +3,6 @@ package ro.uaic.info.vinno.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,9 +23,8 @@ public class UserController {
 	private UserDao userDao;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public ResponseEntity<ResponseBody<Long>> registerUser(@RequestBody RegistrationRequest req, HttpSession httpSession) {
+	public ResponseBody<Long> registerUser(@RequestBody RegistrationRequest req, HttpSession httpSession) {
 		User createdUser = null;
-		ResponseEntity<ResponseBody<Long>> response = null;
 		User newUser = null;
 		Long nullLong = null;
 		ResponseBody<Long> respBody = null;
@@ -37,58 +34,49 @@ public class UserController {
 		}
 		else{ 
 			respBody = new ResponseBody<Long>(nullLong, "Invalid request");
-			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
-			return response;
+			return respBody;
 		}
 		
 		try {
 			createdUser = userDao.save(newUser);
 			respBody = new ResponseBody<Long>(createdUser.getId(), "User created");
-			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.CREATED);
 		} catch (UserAlreadyExistsException e) {
 			respBody = new ResponseBody<Long>(nullLong, "User already exists");
-			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
 		}
-		return response;
+		return respBody;
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ResponseEntity<ResponseBody<Long>> login(@RequestBody LoginRequest req, HttpSession httpSession){
-		ResponseEntity<ResponseBody<Long>> response = null;
+	public ResponseBody<Long> login(@RequestBody LoginRequest req, HttpSession httpSession){
 		User user = null;
 		Long nullLong = null;
 		ResponseBody<Long> respBody = null;
 		
 		if(!this.validateLoginReq(req)){
 			respBody = new ResponseBody<Long>(nullLong, "One of the fields is missing");
-			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
-			return response;
+			return respBody;
 		}
 		
 		user = userDao.get(req.getUsername());
 		
 		if(user != null && user.getPassword().equals(req.getPassword())){
 			respBody = new ResponseBody<Long>(user.getId(), "Success");			
-			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
 		} else {
 			respBody = new ResponseBody<Long>(nullLong, "Username or password invalid");
-			response = new ResponseEntity<ResponseBody<Long>>(respBody, HttpStatus.OK);
 		}
 		
-		return response;
+		return respBody;
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public ResponseEntity<ResponseBody<Boolean>> logout(HttpSession httpSession){
-		ResponseEntity<ResponseBody<Boolean>> response = null;
+	public ResponseBody<Boolean> logout(HttpSession httpSession){
 		ResponseBody<Boolean> respBody = null;
 		
 		httpSession.invalidate();
 		
 		respBody = new ResponseBody<Boolean>(true, "Success");
-		response = new ResponseEntity<ResponseBody<Boolean>>(respBody, HttpStatus.OK);
 		
-		return response;
+		return respBody;
 	}
 	
 	private boolean validateLoginReq(LoginRequest req){
