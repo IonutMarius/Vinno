@@ -5,7 +5,7 @@ function getVideoInfo (videoId) {
             if(response != undefined){
                 var imageUrl = "http://i1.ytimg.com/vi/"+videoId+"/0.jpg";
                 console.log(imageUrl);
-                var html = "<h2>Currently playing: </h2><img src='"+imageUrl+"' width='320px' height='200px'/> <p id='content' data-value='"+response.title+"' data-turl='"+imageUrl+"'data-url='"+response.url+"' >"+response.title+" </p>";
+                var html = "<h4>Currently playing: </h4><img src='"+imageUrl+"' width='320px' height='200px'/> <p id='content' data-value='"+response.title+"' data-turl='"+imageUrl+"'data-url='"+response.url+"' >"+response.title+" </p>";
                 console.log(html);
                 $("#addVideoBtn").before(html);
             }
@@ -86,7 +86,7 @@ $(document).ready(function() {
     getUserId();
     getUsername();
     getVideoID();
-    $("#testButton").on("click", function(){
+    $("#addVideoBtn").on("click", function(){
         addVideo();
     });
     $("#logoutBtn").on("click", function(){
