@@ -7,7 +7,7 @@ function getVideoInfo (videoId) {
                 console.log(imageUrl);
                 var html = "<h2>Currently playing: </h2><img src='"+imageUrl+"' width='320px' height='200px'/> <p id='content' data-value='"+response.title+"' data-turl='"+imageUrl+"'data-url='"+response.url+"' >"+response.title+" </p>";
                 console.log(html);
-                $("#currentPlaying").html(html);
+                $("#addVideoBtn").before(html);
             }
 
         });
