@@ -41,7 +41,7 @@ public class VideoController {
 		return respBody;
 	}
 	
-	@RequestMapping(value = "/get/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getAll/{userId}", method = RequestMethod.GET)
 	public ResponseBody<List<Video>> getVideos(@PathVariable(value = "userId") Long userId){
 		ResponseBody<List<Video>> respBody = null;
 		
@@ -51,7 +51,7 @@ public class VideoController {
 		return respBody;
 	}
 	
-	@RequestMapping(value = "/delete/{videoId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{videoId}", method = RequestMethod.DELETE)
 	public ResponseBody<Boolean> deleteVideo(@PathVariable(value = "videoId") Long videoId){
 		ResponseBody<Boolean> respBody = null;
 		
