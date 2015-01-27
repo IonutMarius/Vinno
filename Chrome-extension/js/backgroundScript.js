@@ -67,6 +67,14 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             getVideos(request,sender,sendResponse);
             return true;
             break;
+        case "getLocalVideos":
+            getLocalVideos(request,sender,sendResponse);
+            return true;
+            break;
+        case "updateVideos":
+            updateLocalVideos(request,sender,sendResponse);
+            return true;
+            break;
     }
 });
 function getCredentialsAJAXCall(request, sender, sendResponse){  
@@ -90,6 +98,7 @@ function getVideos(request, sender, sendResponse){
         type: 'GET',
         success: function(response){
             console.log(response);
+            saveVideosToSessionStorage(response);
             sendResponse(response);
         },
         error: function(e){
@@ -154,9 +163,17 @@ function checkIfLogged(){
 function saveVideosToSessionStorage(videos){
     sessionStorage["videos"] = videos;
 }
+function  getLocalVideos(request,sender,sendResponse){
+    sendResponse(sessionStorage["videos"]);
+}
+function updateVideos(request,sender,sendResponse){
+    sessionStorage["videos"] = request.data;
+}
 function logout(request, sender, sendResponse){
     sessionStorage["login"] = undefined;
     sessionStorage["userid"] = undefined;
+    sessionStorage["username"] = undefined;
+    sessionStorage["videos"] = undefined;
     $.ajax({
         url: 'http://25.156.172.66:8080/vinno/users/logout',
         type: 'POST',
