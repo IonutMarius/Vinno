@@ -15,7 +15,7 @@ $(document).ready(function() {
             if(response != undefined){
                 console.log(response.data);
                 console.log(response.message);
-
+                window.location.replace("../pages/edit.html");
             }
         });
     });
@@ -34,40 +34,47 @@ function loadAnnotations(){
         if(response != undefined){
             console.log(response.message);
             if(response.data != undefined){
+                var classVariable = "";
+                var annotationClass = "";
                 for(var i = 0;i<response.data.length;i++){
                     switch(response.data[i].type){
                         case "tag":
-                            console.log(response.data[i].type);
+                            classVariable = $(".tags");
+                            annotationClass = "annotation-tags";
                             break;
                         case "comment":
-                            console.log(response.data[i].type);
+                            classVariable = $(".comments");
+                            annotationClass = "comments-tags";
                             break;
                         case "related-video":
-                            console.log(response.data[i].type);
+                            classVariable = $(".related-videos");
+                            annotationClass = "related-videos-tags";
                             break;
                         case "person":
-                            console.log(response.data[i].type);
+                            classVariable = $(".people");
+                            annotationClass = "people-tags";
                             break;
                     }
+                    classVariable.append("<div class='"+annotationClass+"'>"+response.data[i].data+"</div>");
                 }
-//                var html = "<h5>My videos</h5>";
-//                for(var i = 0;i<response.data.length;i++){
-//                    html += "<div class='video' data-id='"+response.data[i].id+"' data-thumbnail='"+response.data[i].thumbnailUrl+"' data-title='"+response.data[i].title+"'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger btn-xs deleteBtn'><span class='glyphicon glyphicon-remove'></span></button></div></div></div></div>";
-//                }
-//                $("#loadedVideos").html(html);
-//                $(".deleteBtn").on("click",function(){
-//                    var videoId = $(this).closest(".video").data("id");
-//                    deleteVideo(videoId);
-//                });
-//                $(".editBtn").on("click",function(){
-//                    var videoId = $(this).closest(".video").data("id");
-//                    var thumbnailUrl = $(this).closest(".video").data("thumbnail");
-//                    var title = $(this).closest(".video").data("title");
-//                    var videoId = $(this).closest(".video").data("id");
-//                    var username = window.username;
-//                    addValuesForEditInSS(thumbnailUrl,title,username,videoId);
-//                    window.location.replace("../pages/edit.html");
-//                });
+                //                var html = "<h5>My videos</h5>";
+                //                for(var i = 0;i<response.data.length;i++){
+                //                    html += "<div class='video' data-id='"+response.data[i].id+"' data-thumbnail='"+response.data[i].thumbnailUrl+"' data-title='"+response.data[i].title+"'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger btn-xs deleteBtn'><span class='glyphicon glyphicon-remove'></span></button></div></div></div></div>";
+                //                }
+                //                $("#loadedVideos").html(html);
+                //                $(".deleteBtn").on("click",function(){
+                //                    var videoId = $(this).closest(".video").data("id");
+                //                    deleteVideo(videoId);
+                //                });
+                //                $(".editBtn").on("click",function(){
+                //                    var videoId = $(this).closest(".video").data("id");
+                //                    var thumbnailUrl = $(this).closest(".video").data("thumbnail");
+                //                    var title = $(this).closest(".video").data("title");
+                //                    var videoId = $(this).closest(".video").data("id");
+                //                    var username = window.username;
+                //                    addValuesForEditInSS(thumbnailUrl,title,username,videoId);
+                //                    window.location.replace("../pages/edit.html");
+                //                });
             }
         }
     });
