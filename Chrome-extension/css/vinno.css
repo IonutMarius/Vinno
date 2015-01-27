@@ -165,3 +165,6 @@ h4{
     cursor: inherit;
     display: block;
 }
+.editTitle{
+    font-size:13px !important;
+}
