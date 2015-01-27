@@ -53,7 +53,7 @@ function loadVideos(){
             console.log(response);
             console.log(response.message);
             if(response.data != undefined){
-                var html = "";
+                var html = "<h4>My videos</h4>";
                 for(var i = 0;i<response.data.length;i++){
                     html += "<div class='video'><div class='details clearfix'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p><div class=\"button-container clearfix\"><a href='#' class='btn btn-info btn-xs'>Edit</a><a href='#' class='btn btn-danger btn-xs'>Delete</a></div></div></div></div>";
                 }

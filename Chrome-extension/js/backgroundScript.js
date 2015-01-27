@@ -151,8 +151,8 @@ function checkIfLogged(){
     }
     return "Fail";
 }
-function saveVideosToSessionStorage(){
-    
+function saveVideosToSessionStorage(videos){
+    sessionStorage["videos"] = videos;
 }
 function logout(request, sender, sendResponse){
     sessionStorage["login"] = undefined;
