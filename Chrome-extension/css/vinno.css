@@ -74,13 +74,15 @@ body{
     margin-top: 5px;
     margin-bottom: 5px;
     width: 100%;
+    font-size: 11px;
 }
 
 .video-title{
-    margin-top: 5px;
+    margin-top: 0px;
     margin-left: 3%;
     width: 50%;
     float: left;
+    font-size: 13px !important;
 }
 
 .separator{
@@ -90,8 +92,9 @@ body{
     margin-bottom: 12px;
 }
 
-#currentPlaying{
+#currentlyPlaying{
     margin: 12px 0px 0px 0px;
+    padding-top: 7px;
 }
 
 #loadedVideos{
@@ -101,9 +104,14 @@ body{
 #addVideoBtn{
     padding: 0;
     width: 70%;
+    height: 30px;
     margin: 0 15% 0 15%;
 }
 
 .hidden{
     display: none;
+}
+
+h4{
+    text-align: center;
 }
