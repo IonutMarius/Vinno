@@ -5,7 +5,7 @@ function getVideoInfo (videoId) {
             if(response != undefined){
                 var imageUrl = "http://i1.ytimg.com/vi/"+videoId+"/0.jpg";
                 console.log(imageUrl);
-                var html = "<h5>Currently playing:</h5> <div class='preview clearfix'><div class='preview-left'><img src='"+imageUrl+"' width='320px' height='200px'/></div> <div class='preview-right'><p id='content' data-value='"+response.title+"' data-turl='"+imageUrl+"'data-url='"+response.url+"' >"+response.title+" </p><button id='addVideoBtn' class='btn btn-primary btn-lg'>Add video</button></div</div>";
+                var html = "<h5>Currently playing:</h5> <div class='preview clearfix'><div class='preview-left'><img src='"+imageUrl+"'/></div> <div class='preview-right'><p id='content' data-value='"+response.title+"' data-turl='"+imageUrl+"'data-url='"+response.url+"' >"+response.title+" </p><button id='addVideoBtn' class='btn btn-primary btn-lg'>Add video</button></div</div>";
                 console.log(html);
                 $("#currentlyPlaying").removeClass("hidden");
                 $(".separator").removeClass("hidden");

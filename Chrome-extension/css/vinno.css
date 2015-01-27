@@ -84,7 +84,7 @@ body{
 }
 
 p{
-    font-size: 13px !important;
+    font-size: 15px !important;
 }
 
 .separator{
@@ -121,4 +121,24 @@ h4{
 
 .save-btn{
     margin-left: 15px;
+}
+
+.preview-right{
+    float: right;
+    width: 45%;
+    margin-left: 5%;
+}
+
+.preview-left{
+    float: left;
+    width: 50%;
+}
+
+.preview-left > img{
+    width: 100%;
+    height: auto;
+}
+
+.preview-right > p{
+    text-align: center;   
 }
