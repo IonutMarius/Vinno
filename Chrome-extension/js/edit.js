@@ -8,16 +8,18 @@ $(document).ready(function() {
         annotation.videoId = sessionStorage["videoId"];
         annotation.type = type;
         annotation.data = annotationValue;
+        if(annotationValue != ""){
+            console.log(JSON.stringify(annotation));
 
-        console.log(JSON.stringify(annotation));
+            chrome.runtime.sendMessage({action: "addAnnotation", data: JSON.stringify(annotation)}, function(response){
+                if(response != undefined){
+                    console.log(response.data);
+                    console.log(response.message);
+                    window.location.replace("../pages/edit.html");
+                }
+            }); 
+        }
 
-        chrome.runtime.sendMessage({action: "addAnnotation", data: JSON.stringify(annotation)}, function(response){
-            if(response != undefined){
-                console.log(response.data);
-                console.log(response.message);
-                window.location.replace("../pages/edit.html");
-            }
-        });
     });
     $(document).on("click",".closeBtn",function(){
         window.location.replace("../pages/vinno.html");
@@ -61,10 +63,10 @@ function loadAnnotations(){
                     if(response.data[i].type === "related-video"){
                         var videoId = getVideoIdFromUrl(response.data[i].data);
                         var thumbnailUrl = "http://i1.ytimg.com/vi/"+videoId+"/0.jpg";
-                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'><img src='"+thumbnailUrl+"' class ='thumbnail' /><a href='"+response.data[i].data+"' class='video-title'>"+response.data[i].data+"</a><button class='btn btn-danger btn-xs deleteAnnotationBtn'><span class='glyphicon glyphicon-remove'></span></button></div>");      
+                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'><img src='"+thumbnailUrl+"' class ='thumbnail' /><a href='"+response.data[i].data+"' class='video-title'>"+response.data[i].data+"</a><span class='glyphicon glyphicon-remove deleteAnnotationBtn'></span></div>");      
                     }
                     else{
-                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'>"+response.data[i].data+"<button class='btn btn-danger btn-xs deleteAnnotationBtn'><span class='glyphicon glyphicon-remove'></span></button></div>");
+                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'>"+response.data[i].data+"<span class='glyphicon glyphicon-remove deleteAnnotationBtn'></span></div>");
                     }
 
                     $(".deleteAnnotationBtn").on("click", function(){

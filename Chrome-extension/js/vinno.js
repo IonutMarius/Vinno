@@ -108,7 +108,7 @@ function loadVideos(){
                         }
                                                   );
 
-                    annNode.slideToggle(600);
+                    annNode.slideToggle();
                 });
             }
         }
