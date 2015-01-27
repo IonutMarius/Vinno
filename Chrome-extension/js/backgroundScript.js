@@ -67,10 +67,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
             getVideos(request,sender,sendResponse);
             return true;
             break;
-        case "getLocalVideos":
-            getLocalVideos(request,sender,sendResponse);
-            return true;
-            break;
         case "deleteVideo":
             deleteVideo(request,sender,sendResponse);
             return true;
@@ -98,7 +94,6 @@ function getVideos(request, sender, sendResponse){
         type: 'GET',
         success: function(response){
             console.log("getting videsos: "+response);
-            saveVideosToSessionStorage(JSON.stringify(response.data));
             sendResponse(response);
         },
         error: function(e){
@@ -160,22 +155,7 @@ function checkIfLogged(){
     }
     return "Fail";
 }
-function saveVideosToSessionStorage(videos){
-    sessionStorage["videos"] = videos;
-}
-function  getLocalVideos(request,sender,sendResponse){
-    sendResponse(sessionStorage["videos"]);
-}
 function deleteVideo(request,sender,sendResponse){
-    var localVideos = JSON.parse(sessionStorage["videos"]);
-    console.log("before:" +localVideos);
-    for(var i = 0;i<localVideos.length;i++){
-        if(localVideos[i].id === request.data){
-            localVideos.splice(i,1);
-        }
-    }
-    console.log("after:" +localVideos);
-    sessionStorage["videos"] = JSON.stringify(localVideos);
     $.ajax({
         url: 'http://25.156.172.66:8080/vinno/videos/'+request.data,
         type: 'DELETE',
@@ -192,7 +172,6 @@ function logout(request, sender, sendResponse){
     sessionStorage["login"] = undefined;
     sessionStorage["userid"] = undefined;
     sessionStorage["username"] = undefined;
-    sessionStorage["videos"] = undefined;
     $.ajax({
         url: 'http://25.156.172.66:8080/vinno/users/logout',
         type: 'POST',
