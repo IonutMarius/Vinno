@@ -6,6 +6,8 @@ $('#loginForm').submit(function(event ) {
     $inputs.each(function() {
         values[this.name] = $(this).val();
     });
+    var cryptedPass = CryptoJS.MD5(values["password"]);
+    values["password"] = cryptedPass.toString();
     console.log("Sending message with "+JSON.stringify(values));
     chrome.runtime.sendMessage({action: "getCredentials",data:JSON.stringify(values)}, function(response) {
         if(response != undefined){
@@ -28,6 +30,10 @@ $('#registerForm').submit(function(event ) {
     $inputs.each(function() {
         values[this.name] = $(this).val();
     });
+    var cryptedPass = CryptoJS.MD5(values["password"]);
+    values["password"] = cryptedPass.toString();
+    cryptedPass = CryptoJS.MD5(values["passwordConf"]);
+    values["passwordConf"] = cryptedPass.toString();
     console.log("Sending message with "+JSON.stringify(values));
     chrome.runtime.sendMessage({action: "registerCredentials",data:JSON.stringify(values)}, function(response) {
         if(response != undefined){
