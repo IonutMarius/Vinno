@@ -210,3 +210,7 @@ h4{
     margin: 0px;
     padding: 15px;
 }
+.details-left{
+    width:89%;
+    float:left;
+}
