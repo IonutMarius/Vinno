@@ -58,7 +58,7 @@ function loadVideos(){
             if(response.data != undefined){
                 var html = "<h5>My videos</h5>";
                 for(var i = 0;i<response.data.length;i++){
-                    html += "<div class='video' data-id='"+response.data[i].id+"' data-thumbnail='"+response.data[i].thumbnailUrl+"' data-title='"+response.data[i].title+"'><div class='details clearfix'><div class='details-left'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p></div><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger btn-xs deleteBtn'><span class='glyphicon glyphicon-remove'></span></button></div></div><div class='annotations '><div class='tags'><p class='displayTitle'>Tags</p></div><div class='comments'><p class='displayTitle'>Comments</p></div><div class='related-videos clearfix'><p class='displayTitle'>Related videos</p></div><div class='people'><p class='displayTitle'>People</p></div><div class='places'><p class='displayTitle'>Places</p></div></div></div></div>";
+                    html += "<div class='video' data-id='"+response.data[i].id+"' data-thumbnail='"+response.data[i].thumbnailUrl+"' data-title='"+response.data[i].title+"'><div class='details clearfix'><div class='details-left'><img class='thumbnail' src='"+response.data[i].thumbnailUrl+"'><p class='video-title'>"+response.data[i].title+"</p></div><div class=\"button-container clearfix\"><button class='btn btn-info btn-xs editBtn'><span class='glyphicon glyphicon-pencil'></span></button><button class='btn btn-danger btn-xs deleteBtn'><span class='glyphicon glyphicon-remove'></span></button></div></div><div class='annotations '><div class='tags'><p class='displayTitle'>Tags</p></div><div class='comments'><p class='displayTitle'>Comments</p></div><div class='related-videos clearfix'><p class='displayTitle'>Related videos</p></div><div class='images'><p class='displayTitle'>Images</p></div><div class='people'><p class='displayTitle'>People</p></div><div class='places'><p class='displayTitle'>Places</p></div></div></div></div>";
                 }
                 $("#loadedVideos").html(html);
                 $(".deleteBtn").on("click",function(){
@@ -103,6 +103,9 @@ function loadVideos(){
                                                 break;
                                             case "place":
                                                 annNode.find(".places").append("<div class='annotation-small ann-place'>" + response.data[i].data + "</div>");
+                                                break;
+                                            case "image":
+                                                annNode.find(".images").append("<div class='annotations-small' data-annotation='"+response.data[i].id+"'>" + "<a href='"+response.data[i].data+"'</a><img src='" + response.data[i].data +"' class=' ann-img'></a></div>");
                                                 break;
                                         }
                                     }

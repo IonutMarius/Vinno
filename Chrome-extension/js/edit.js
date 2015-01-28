@@ -74,7 +74,7 @@ function loadAnnotations(){
                         classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'><img src='"+thumbnailUrl+"' class ='thumbnail' /><a href='"+response.data[i].data+"' class='video-title'>"+response.data[i].data+"</a><span class='glyphicon glyphicon-remove deleteAnnotationBtn'></span></div>");      
                     }
                     else if(response.data[i].type === "image"){
-                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'>" + "<a href='"+response.data[i].data+"'</a><img src='" + response.data[i].data +"'></a>" + "<span class='glyphicon glyphicon-remove deleteAnnotationBtn'></span></div>");
+                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'>" + "<a href='"+response.data[i].data+"'</a><img src='" + response.data[i].data +"' class='ann-img'></a>" + "<span class='glyphicon glyphicon-remove deleteAnnotationBtn'></span></div>");
                     }
                     else{
                         classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'>"+response.data[i].data+"<span class='glyphicon glyphicon-remove deleteAnnotationBtn'></span></div>");
