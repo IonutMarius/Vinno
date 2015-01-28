@@ -195,3 +195,7 @@ h4{
 .related-videos-container{
     overflow: hidden;
 }
+.details-left{
+    width:89%;
+    float:left;
+}
