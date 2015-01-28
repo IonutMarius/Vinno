@@ -82,7 +82,6 @@ body{
     margin-left: 3%;
     width: 56%;
     float: left;
-    color: white;
 }
 
 p{
@@ -213,4 +212,7 @@ h4{
 .details-left{
     width:89%;
     float:left;
+}
+.editTitle{
+    color: white;   
 }
