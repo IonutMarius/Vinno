@@ -102,7 +102,7 @@ function loadVideos(){
                                                 annNode.find(".people").append("<div class='annotation-small ann-person'>" + response.data[i].data + "</div>");
                                                 break;
                                             case "place":
-                                                annNode.find(".place").append("<div class='annotation-small ann-place'>" + response.data[i].data + "</div>");
+                                                annNode.find(".places").append("<div class='annotation-small ann-place'>" + response.data[i].data + "</div>");
                                                 break;
                                         }
                                     }

@@ -205,6 +205,9 @@ h4{
     display: inline-block;
     height: 60px;
 }
+.annotation-related-videos{
+    float:left;
+}
 .jumbotron{
     margin: 0px;
     padding: 15px;
@@ -215,4 +218,7 @@ h4{
 }
 .editTitle{
     color: white;   
+}
+.ann-video{
+    float:left;
 }
