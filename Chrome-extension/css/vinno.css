@@ -192,3 +192,6 @@ h4{
 .glyphicon{
     cursor: pointer; cursor: hand;
 }
+.related-videos-container{
+    overflow: hidden;
+}
