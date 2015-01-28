@@ -45,7 +45,7 @@ function loadAnnotations(){
                     switch(response.data[i].type){
                         case "tag":
                             classVariable = $(".tags");
-                            annotationClass = "annotation-tags";
+                            annotationClass = "annotation-tags ann-tag";
                             break;
                         case "comment":
                             classVariable = $(".comments");

@@ -174,7 +174,6 @@ h4{
 }
 .deleteAnnotationBtn{
     margin-left:13px;
-    float:right;
 }
 .annotations{
     display: none;
@@ -184,4 +183,12 @@ h4{
 .displayTitle{
     margin:0 !important;
     font-weight: bold !important;
+}
+.ann-tag{
+    display:inline;
+    background-color:#C9C9C9;
+    margin: 2px;
+}
+.glyphicon{
+    cursor: pointer; cursor: hand;
 }
