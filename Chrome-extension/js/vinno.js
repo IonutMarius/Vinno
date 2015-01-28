@@ -105,7 +105,7 @@ function loadVideos(){
                                                 annNode.find(".places").append("<div class='annotation-small ann-place'>" + response.data[i].data + "</div>");
                                                 break;
                                             case "image":
-                                                annNode.find(".images").append("<div class='annotations-small' data-annotation='"+response.data[i].id+"'>" + "<a href='"+response.data[i].data+"'</a><img src='" + response.data[i].data +"' class=' ann-img'></a></div>");
+                                                annNode.find(".images").append("<div class='annotations-small ann-img' data-annotation='"+response.data[i].id+"'>" + "<a href='"+response.data[i].data+"'</a><img src='" + response.data[i].data +"' class=' ann-img'></a></div>");
                                                 break;
                                         }
                                     }

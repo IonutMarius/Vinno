@@ -203,6 +203,7 @@ h4{
 }
 .ann-img{
     display: inline-block;
+    margin: 5px 5px 5px 0px;
     height: 60px;
 }
 .annotation-related-videos{
