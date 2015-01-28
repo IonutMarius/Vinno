@@ -202,7 +202,7 @@ h4{
     display: inline-block;
     margin: 5px 5px 5px 5px;
 }
-.annotation-images > img{
+.annotation-images img{
     display: inline-block;
     height: 60px;
 }
