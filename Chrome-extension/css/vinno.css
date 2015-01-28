@@ -40,6 +40,7 @@ body{
     display: inline-block;
     margin: 0;
     padding: 0px 0px 0px 10px;
+    color: white;
 }
 
 .username{    
@@ -81,6 +82,7 @@ body{
     margin-left: 3%;
     width: 56%;
     float: left;
+    color: white;
 }
 
 p{
@@ -144,7 +146,8 @@ h4{
 }
 
 .vinno-header{
-    background-color: #DAE1E7;
+    background-color: #082A3F;
+    color: white;
 }
 .btn-file {
     position: relative;
@@ -194,4 +197,16 @@ h4{
 }
 .related-videos-container{
     overflow: hidden;
+}
+.annotation-images{
+    display: inline-block;
+    margin: 5px 5px 5px 5px;
+}
+.annotation-images > img{
+    display: inline-block;
+    height: 60px;
+}
+.jumbotron{
+    margin: 0px;
+    padding: 15px;
 }

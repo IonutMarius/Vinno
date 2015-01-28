@@ -49,21 +49,28 @@ function loadAnnotations(){
                             break;
                         case "comment":
                             classVariable = $(".comments");
-                            annotationClass = "comments-tags";
+                            annotationClass = "annotation-comments";
                             break;
                         case "related-video":
                             classVariable = $(".related-videos");
-                            annotationClass = "related-videos-tags";
+                            annotationClass = "annotation-related-videos";
                             break;
                         case "person":
                             classVariable = $(".people");
-                            annotationClass = "people-tags";
+                            annotationClass = "annotation-people";
+                            break;
+                        case "image":
+                            classVariable = $(".images");
+                            annotationClass = "annotation-images";
                             break;
                     }
                     if(response.data[i].type === "related-video"){
                         var videoId = getVideoIdFromUrl(response.data[i].data);
                         var thumbnailUrl = "http://i1.ytimg.com/vi/"+videoId+"/0.jpg";
                         classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'><img src='"+thumbnailUrl+"' class ='thumbnail' /><a href='"+response.data[i].data+"' class='video-title'>"+response.data[i].data+"</a><span class='glyphicon glyphicon-remove deleteAnnotationBtn'></span></div>");      
+                    }
+                    else if(response.data[i].type === "image"){
+                        classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'>" + "<img src='" + response.data[i].data +"'>" + "<span class='glyphicon glyphicon-remove deleteAnnotationBtn'></span></div>");
                     }
                     else{
                         classVariable.append("<div class='"+annotationClass+"' data-annotation='"+response.data[i].id+"'>"+response.data[i].data+"<span class='glyphicon glyphicon-remove deleteAnnotationBtn'></span></div>");

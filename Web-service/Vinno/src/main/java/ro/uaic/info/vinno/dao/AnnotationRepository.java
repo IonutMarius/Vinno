@@ -3,12 +3,15 @@ package ro.uaic.info.vinno.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import ro.uaic.info.vinno.bean.Annotation;
 
 public interface AnnotationRepository extends JpaRepository<Annotation, Long> {
+	
+	@Modifying  
 	@Query("DELETE FROM Annotation a WHERE a.videoId = :videoId")
 	public void clearAnnotations(@Param("videoId") Long videoId);
 	

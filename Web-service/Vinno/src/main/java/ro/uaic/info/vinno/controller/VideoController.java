@@ -60,9 +60,9 @@ public class VideoController {
 		ResponseBody<Boolean> respBody = null;
 		Boolean confirmation = true;
 		String msg = "Success";
-		
-		this.videoDao.delete(videoId);
+
 		this.annotationDao.deleteAll(videoId);
+		this.videoDao.delete(videoId);
 		
 		respBody = new ResponseBody<Boolean>(confirmation, msg);
 		
