@@ -63,6 +63,10 @@ function loadAnnotations(){
                             classVariable = $(".images");
                             annotationClass = "annotation-images";
                             break;
+                        case "place":
+                            classVariable = $(".places");
+                            annotationClass = "annotation-places";
+                            break;
                     }
                     if(response.data[i].type === "related-video"){
                         var videoId = getVideoIdFromUrl(response.data[i].data);
